@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GetPet</string>
+    <string name="title_activity_private_area">PrivateAreaActivity</string>
 </resources>
