@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="316dp"
+            android:src="@drawable/logo"
+
+
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <EditText
+            android:id="@+id/User_Name"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:hint="@string/register_label_name"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/textColor"
+            android:drawableStart="@drawable/ic_name"
+            />
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:hint="@string/register_label_email"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/textColor"
+            android:drawableStart="@drawable/ic_email"
+            />
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:hint="@string/register_label_password"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:drawableStart="@drawable/ic_password"
+            />
+        <EditText
+            android:id="@+id/Confirm_Password"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:hint="@string/register_label_confirm_password"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:drawableStart="@drawable/ic_password"
+            />
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:background="@drawable/round_button"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:text="@string/register_label_submit"
+            android:onClick="onSubmitClick"
+            />
+
+        <Button
+            android:id="@+id/goBack_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:background="@drawable/round_button"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:text="@string/register_label_go_back"
+            android:onClick="onGoBackClick"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
