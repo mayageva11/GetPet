@@ -15,4 +15,5 @@
     <string name="register_label_Error_failure_sign_up">Sign up failed, try again</string>
     <string name="main_label_log_in_success">success</string>
     <string name="main_label_failed_log_in">log in failed, try again</string>
+    <string name="title_activity_private_area">PrivateAreaActivity</string>
 </resources>

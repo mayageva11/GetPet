@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this,getString(string.main_label_log_in_success)
                         ,Toast.LENGTH_SHORT).show()
                     //TODO: add intent activity to the next activity- to the map
-                    //val signInActivityIntent = Intent(applicationContext,MapActivity::class.java)
+                    //val signInActivityIntent = Intent(applicationContext,Activity::class.java)
                     //startActivity(signInActivityIntent)
                 } else {
                     // If sign in fails, display a message to the user.
