@@ -14,12 +14,12 @@ class PrivateAreaActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.UploadAPet.setOnClickListener {
-            val intent = Intent(this,UploadAPetActivity::class.java)
+            val intent = Intent(this, UploadAPetActivity::class.java)
             startActivity(intent)
         }
 
         binding.BackToHomePage.setOnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

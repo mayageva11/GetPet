@@ -24,41 +24,44 @@ class RegisterActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         //get the information from the edit text
-        val userNameEditText : EditText = findViewById(R.id.User_Name)
-        val emailEditText : EditText = findViewById(R.id.Email)
-        val passwordEditText : EditText = findViewById(R.id.Password)
-        val confirmPasswordEditText : EditText = findViewById(R.id.Confirm_Password)
+        val userNameEditText: EditText = findViewById(R.id.User_Name)
+        val emailEditText: EditText = findViewById(R.id.Email)
+        val passwordEditText: EditText = findViewById(R.id.Password)
+        val confirmPasswordEditText: EditText = findViewById(R.id.Confirm_Password)
 
         val submitBtn = findViewById<Button>(R.id.submit_btn)
-        submitBtn.setOnClickListener{
-            //TODO: get the email and password and name
+        submitBtn.setOnClickListener {
+            // get the email and password and name
             val userName = userNameEditText.text.toString()
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-            val confirmPassword= confirmPasswordEditText.text.toString()
-            // TODO: validate email and password name
-            if( validate(email,password,confirmPassword,userName)){
-                //TODO: send the information to the register func
-                register(email, password,userName)
-            }
-            else{
-                Toast.makeText(this,getText(R.string.register_label_Error_fill_information),
-                    Toast.LENGTH_SHORT).show()
+            val confirmPassword = confirmPasswordEditText.text.toString()
+            //  validate email and password name
+            if (validate(email, password, confirmPassword, userName)) {
+                // send the information to the register func
+                register(email, password, userName)
+            } else {
+                Toast.makeText(
+                    this, getText(R.string.register_label_Error_fill_information),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
 
         val goBackBtn = findViewById<Button>(R.id.goBack_btn)
-        goBackBtn.setOnClickListener{
-            val goBackActivityIntent = Intent(applicationContext, MainActivity::class.java )
+        goBackBtn.setOnClickListener {
+            val goBackActivityIntent = Intent(applicationContext, MainActivity::class.java)
             startActivity(goBackActivityIntent)
         }
-
-
-
     }
 
-    private fun validate(email: String, password: String, confirmPassword: String, userName: String): Boolean {
+    private fun validate(
+        email: String,
+        password: String,
+        confirmPassword: String,
+        userName: String
+    ): Boolean {
         val isEmailValid = isValidEmail(email)
         val isPasswordValid = password.isNotEmpty()
         val isPasswordLongEnough = password.length
@@ -66,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
         val isUsernameValid = userName.isNotEmpty()
 
         return isEmailValid && isPasswordValid && doPasswordsMatch && isUsernameValid
-                && (isPasswordLongEnough==6)
+                && (isPasswordLongEnough == 6)
     }
 
     private fun isValidEmail(email: String): Boolean {
@@ -74,22 +77,25 @@ class RegisterActivity : AppCompatActivity() {
         return emailPattern.matcher(email).matches()
     }
 
-
     private fun register(email: String, password: String, userName: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    //TODO: message of success
-                    Toast.makeText(this,getString(R.string.register_label_Error_fill_information)
-                        ,Toast.LENGTH_SHORT).show()
-                    //TODO:go to main activity to sign in
-                    val submitActivityIntent= Intent(applicationContext, MainActivity::class.java)
+                    // message of success
+                    Toast.makeText(
+                        this,
+                        getString(R.string.register_label_Error_fill_information),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    //go to main activity to sign in
+                    val submitActivityIntent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(submitActivityIntent)
                 } else {
-                    //TODO: show a failure message
-                    Toast.makeText(this,getString(R.string.register_label_Error_failure_sign_up),
-                        Toast.LENGTH_SHORT).show()
-
+                    // show a failure message
+                    Toast.makeText(
+                        this, getString(R.string.register_label_Error_failure_sign_up),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

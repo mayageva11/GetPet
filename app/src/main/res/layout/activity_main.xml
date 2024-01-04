@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:background="@color/cream"
     android:orientation="vertical">
+
     <ImageView
-        android:src="@drawable/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        />
+        android:src="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
 
         <EditText
@@ -24,51 +23,49 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:hint="@string/main_label_email"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/textColor"
             android:drawableStart="@drawable/ic_email"
-            />
+            android:hint="@string/main_label_email"
+            android:textColor="@color/textColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/PasswordText"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_password"
             android:hint="@string/main_label_password"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="@color/textColor"
-            android:drawableStart="@drawable/ic_password"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/LogIn_Btn"
-            android:text="@string/main_label_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_button"
+            android:text="@string/main_label_login"
             android:textColor="@color/textColor"
             android:textSize="17sp"
-            android:textStyle="bold"
-            android:background="@drawable/round_button"
-           android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 
 
     <Button
-        android:text="@string/main_label_click_here_to_register"
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
         android:background="@drawable/round_button"
+        android:text="@string/main_label_click_here_to_register"
+        android:textColor="@color/textColor"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="12dp"
-        android:layout_gravity="center"
-
 
 
         />
