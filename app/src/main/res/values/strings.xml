@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">GetPet</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="register_label_name"> Name</string>
+    <string name="register_label_email"> Email</string>
+    <string name="register_label_password"> Password</string>
+    <string name="register_label_confirm_password"> Confirm Password</string>
+    <string name="register_label_go_back">go back</string>
+    <string name="register_label_submit">submit</string>
+    <string name="main_label_click_here_to_register">  click here to register  </string>
+    <string name="main_label_login">Login</string>
+    <string name="main_label_password">Password</string>
+    <string name="main_label_email">Email</string>
+    <string name="register_label_Error_fill_information">Please fill all the information above</string>
+    <string name="register_label_Error_failure_sign_up">Sign up failed, try again</string>
+    <string name="main_label_log_in_success">success</string>
+    <string name="main_label_failed_log_in">log in failed, try again</string>
+    <string name="title_activity_private_area">PrivateAreaActivity</string>
 </resources>
