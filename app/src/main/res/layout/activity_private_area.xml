@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/cream"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cream"
     tools:context=".activities.PrivateAreaActivity">
 
     <Button
@@ -28,8 +28,8 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/round_button"
         android:text="  My Uploads  "
-        android:textSize="15sp"
         android:textColor="@color/textColor"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
@@ -73,8 +73,8 @@
         android:background="@drawable/round_button"
         android:text="  Upload A Pet  "
         android:textColor="@color/textColor"
-        android:textStyle="bold"
         android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/MyUploads"
