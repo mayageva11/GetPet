@@ -16,4 +16,13 @@
     <string name="main_label_log_in_success">success</string>
     <string name="main_label_failed_log_in">log in failed, try again</string>
     <string name="title_activity_private_area">PrivateAreaActivity</string>
+    <string name="private_area_label_title">Private Area</string>
+    <string name="private_arear_label_my_uploads">My Uploads</string>
+    <string name="private_area_label_upload_a_pet">Upload A Pet</string>
+    <string name="private_area_label_reset_password">Reset Password</string>
+    <string name="private_area_label_change_your_password_title">Change Your Password:</string>
+    <string name="private_area_label_email_filling">Email</string>
+    <string name="private_area_label_password_filling">Password</string>
+    <string name="private_area_label_logout">LogOut</string>
+    <string name="private_area_label_back_to_home_page">Back To Home Page</string>
 </resources>

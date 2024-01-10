@@ -1,154 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/cream"
-    tools:context=".activities.PrivateAreaActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cream"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/LogOut"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/round_button"
-        android:text="  LogOut  "
-        android:textColor="@color/textColor"
+        android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_pages"
+        android:adjustViewBounds="true">
+    </ImageView>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:background="@color/white" >
+    </View>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/private_area_label_title"
+        android:textSize="40sp"
+        android:layout_margin="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ResetPassword" />
+        android:fontFamily="@font/handlee"
+        android:textColor="@color/textColor">
+    </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
     <Button
-        android:id="@+id/MyUploads"
+        android:id="@+id/transfer_to_my_upload_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30sp"
+        android:background="@drawable/round_button"
+        android:text="@string/private_arear_label_my_uploads"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="@font/raleway"
+        android:textAllCaps="false">
+    </Button>
+
+    <Button
+        android:id="@+id/transfer_to_upload_a_pet_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/round_button"
+        android:text="@string/private_area_label_upload_a_pet"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="@font/raleway"
+        android:textAllCaps="false">
+    </Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+    <TextView
+        android:id="@+id/change_a_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/round_button"
-        android:text="  My Uploads  "
+        android:fontFamily="@font/raleway"
+        android:text="@string/private_area_label_change_your_password_title"
         android:textColor="@color/textColor"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SubTitle" />
+        android:textSize="25sp"
+        android:textStyle="bold">
+    </TextView>
 
+    <EditText
+        android:id="@+id/change_email"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:textSize="20sp"
+        android:textColor="@color/textColor"
+        android:ems="13"
+        android:hint="@string/private_area_label_email_filling"
+        android:fontFamily="@font/raleway"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:drawableStart="@drawable/ic_email">
+    </EditText>
+
+    <EditText
+        android:id="@+id/change_password"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:textSize="20sp"
+        android:textColor="@color/textColor"
+        android:ems="13"
+        android:hint="@string/private_area_label_password_filling"
+        android:fontFamily="@font/raleway"
+        android:drawableStart="@drawable/ic_password"
+        >
+    </EditText>
 
     <Button
-        android:id="@+id/ResetPassword"
+        android:id="@+id/reset_password_btm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_button"
-        android:text="  Reset Password  "
+        android:text="@string/private_area_label_reset_password"
+        android:fontFamily="@font/raleway"
+        android:textStyle="bold"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false">
+    </Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/round_button"
+        android:text="@string/private_area_label_logout"
         android:textColor="@color/textColor"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.708" />
+        android:fontFamily="@font/raleway"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:textAllCaps="false">
+    </Button>
 
     <Button
-        android:id="@+id/BackToHomePage"
+        android:id="@+id/private_area_go_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_button"
-        android:text="  Back To Home Page  "
-        android:textColor="@color/textColor"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogOut" />
-
-    <Button
-        android:id="@+id/UploadAPet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_button"
-        android:text="  Upload A Pet  "
-        android:textColor="@color/textColor"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toEndOf="@+id/MyUploads"
-        app:layout_constraintTop_toTopOf="@+id/MyUploads" />
-
-    <TextView
-        android:id="@+id/SubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/handlee"
-        android:text="Private Area"
-        android:textColor="@color/textColor"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:fontFamily="@font/handlee"
-        android:text="Change Your Password:"
+        android:fontFamily="@font/raleway"
+        android:text="@string/private_area_label_back_to_home_page"
         android:textColor="@color/textColor"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UploadAPet" />
+        android:textAllCaps="false">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="421dp"
-        android:layout_height="218dp"
-        android:src="@drawable/logo_pages"
-        app:layout_constraintBottom_toTopOf="@+id/SubTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535" />
+    </Button>
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/Email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.486" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="404dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:minHeight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
