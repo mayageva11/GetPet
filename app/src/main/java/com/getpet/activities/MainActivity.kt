@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.getpet.Constants
 import com.getpet.R
 import com.getpet.R.*
 import com.google.firebase.auth.FirebaseAuth
@@ -14,7 +15,6 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,23 +51,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Toast.makeText(
-                        this, getString(string.main_label_log_in_success), Toast.LENGTH_SHORT
-                    ).show()
-                    //TODO: add intent activity to the next activity- to the map
-                    //val signInActivityIntent = Intent(applicationContext,Activity::class.java)
-                    //startActivity(signInActivityIntent)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(
-                        this, getString(string.main_label_failed_log_in), Toast.LENGTH_SHORT
-                    ).show()
-                }
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                // Sign in success, update UI with the signed-in user's information
+                Toast.makeText(
+                    this, getString(string.main_label_log_in_success), Toast.LENGTH_SHORT
+                ).show()
+                //TODO: add intent activity to the next activity- to the map
+                val signInActivityIntent =
+                    Intent(applicationContext, PrivateAreaActivity::class.java)
+                startActivity(signInActivityIntent)
+            } else {
+                // If sign in fails, display a message to the user.
+                Toast.makeText(
+                    this, getString(string.main_label_failed_log_in), Toast.LENGTH_SHORT
+                ).show()
             }
+        }
     }
 
     private fun validateSignIn(email: String, password: String): Boolean {
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         val isPasswordValid = password.isNotEmpty()
         val isPasswordLongEnough = password.length
 
-        return isEmailValid && isPasswordValid && (isPasswordLongEnough == 6)
+        return isEmailValid && isPasswordValid && (isPasswordLongEnough >= Constants.PASS_MIN_LENGTH)
     }
 
     private fun isValidEmail(email: String): Boolean {

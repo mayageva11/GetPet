@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.getpet.Constants
 import com.getpet.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -69,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
         val isUsernameValid = userName.isNotEmpty()
 
         return isEmailValid && isPasswordValid && doPasswordsMatch && isUsernameValid
-                && (isPasswordLongEnough == 6)
+                && (isPasswordLongEnough >= Constants.PASS_MIN_LENGTH)
     }
 
     private fun isValidEmail(email: String): Boolean {

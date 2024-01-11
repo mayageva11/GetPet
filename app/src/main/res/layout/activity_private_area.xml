@@ -47,44 +47,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginVertical="10dp"
         android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/transfer_to_my_upload_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30sp"
-        android:background="@drawable/round_button"
-        android:text="@string/private_arear_label_my_uploads"
-        android:textColor="@color/textColor"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:fontFamily="@font/raleway"
-        android:textAllCaps="false">
-    </Button>
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/transfer_to_my_upload_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:text="@string/private_area_label_my_uploads" />
 
-    <Button
-        android:id="@+id/transfer_to_upload_a_pet_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/round_button"
-        android:text="@string/private_area_label_upload_a_pet"
-        android:textColor="@color/textColor"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:fontFamily="@font/raleway"
-        android:textAllCaps="false">
-    </Button>
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/transfer_to_upload_a_pet_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/private_area_label_upload_a_pet" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="10dp"
         android:layout_gravity="center">
     <TextView
         android:id="@+id/change_a_password"
@@ -125,20 +111,14 @@
         >
     </EditText>
 
-    <Button
-        android:id="@+id/reset_password_btm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_button"
-        android:text="@string/private_area_label_reset_password"
-        android:fontFamily="@font/raleway"
-        android:textStyle="bold"
-        android:textColor="@color/textColor"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:textAllCaps="false">
-    </Button>
+
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/reset_password_btm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/private_area_label_reset_password" />
     </LinearLayout>
 
     <LinearLayout
@@ -146,36 +126,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/round_button"
-        android:text="@string/private_area_label_logout"
-        android:textColor="@color/textColor"
-        android:textStyle="bold"
-        android:fontFamily="@font/raleway"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:textAllCaps="false">
-    </Button>
 
-    <Button
-        android:id="@+id/private_area_go_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/round_button"
-        android:fontFamily="@font/raleway"
-        android:text="@string/private_area_label_back_to_home_page"
-        android:textColor="@color/textColor"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAllCaps="false">
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/private_area_label_logout" />
 
-    </Button>
+
+
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/private_area_go_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/private_area_label_back_to_home_page" />
     </LinearLayout>
 
 </LinearLayout>
