@@ -16,6 +16,15 @@
     <string name="main_label_log_in_success">success</string>
     <string name="main_label_failed_log_in">log in failed, try again</string>
     <string name="title_activity_private_area">PrivateAreaActivity</string>
+    <string name="private_area_label_title">Private Area</string>
+    <string name="private_area_label_my_uploads">My Uploads</string>
+    <string name="private_area_label_upload_a_pet">Upload A Pet</string>
+    <string name="private_area_label_reset_password">Reset Password</string>
+    <string name="private_area_label_change_your_password_title">Change Your Password:</string>
+    <string name="private_area_label_email_filling">Email</string>
+    <string name="private_area_label_password_filling">Password</string>
+    <string name="private_area_label_logout">LogOut</string>
+    <string name="private_area_label_back_to_home_page">Back To Home Page</string>
     <string name="upload_a_pet_label_title">Upload a pet</string>
     <string name="upload_a_pet_label_image_of_the_pet_button">+ Image of the pet</string>
     <string name="upload_a_pet_label_kind">Kind</string>
@@ -24,7 +33,6 @@
     <string name="upload_a_pet_label_phone_to_connect">Phone To Connect</string>
     <string name="upload_a_pet_label_upload_button">Upload</string>
     <string name="upload_a_pet_label_back_to_private_area">Back To Private Area</string>
-    <string name="title_activity_upload_apet">Upload_A_Pet_Activity</string>
     <string name="upload_a_pet_label_add_img_btn">+ add image</string>
     <string name="upload_a_pet_upload_btn">upload</string>
     <string name="upload_a_pet_go_back_btn">go back</string>

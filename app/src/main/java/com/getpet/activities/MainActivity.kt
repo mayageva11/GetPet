@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 ).show()
                 //TODO: add intent activity to the next activity- to the map
                 val signInActivityIntent =
-                    Intent(applicationContext, UploadAPetActivity::class.java)
+                    Intent(applicationContext, PrivateAreaActivity::class.java)
                 startActivity(signInActivityIntent)
             } else {
                 // If sign in fails, display a message to the user.

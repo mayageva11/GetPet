@@ -1,9 +1,15 @@
 package com.getpet.components
 
+import android.R
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatButton
-import com.getpet.R
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.getpet.R as Resources
+
 
 class PrimaryButton : AppCompatButton {
 
@@ -29,7 +35,14 @@ class PrimaryButton : AppCompatButton {
     }
 
     private fun init() {
-        this.setBackgroundResource(R.drawable.round_button)
+        this.setBackgroundResource(Resources.drawable.round_button)
         setPadding(INLINE_PADDING, BLOCK_PADDING, INLINE_PADDING, BLOCK_PADDING)
+        val typeface: Typeface? = ResourcesCompat.getFont(context, com.getpet.R.font.raleway)
+        setTypeface(typeface, Typeface.BOLD)
+        isAllCaps = false
+        val newTextColor = ContextCompat.getColor(context, Resources.color.textColor)
+        setTextColor(newTextColor)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 20F)
+
     }
 }
