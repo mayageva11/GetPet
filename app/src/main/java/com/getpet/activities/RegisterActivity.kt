@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
         val isUsernameValid = userName.isNotEmpty()
 
         return isEmailValid && isPasswordValid && doPasswordsMatch && isUsernameValid
-                && (isPasswordLongEnough == 6)
+                && (isPasswordLongEnough >= 6)
     }
 
     private fun isValidEmail(email: String): Boolean {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
@@ -30,16 +31,20 @@
         </activity>
         <activity
             android:name=".activities.UploadAPetActivity"
-            android:exported="false" />
+            android:exported="false"
+
+        />
+
         <activity
             android:name=".activities.PrivateAreaActivity"
             android:exported="true"
             android:label="@string/title_activity_private_area"
-            android:theme="@style/Theme.GetPet">
-        </activity>
+            android:theme="@style/Theme.GetPet" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+
 </manifest>

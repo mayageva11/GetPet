@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity() {
                         this, getString(string.main_label_log_in_success), Toast.LENGTH_SHORT
                     ).show()
                     //TODO: add intent activity to the next activity- to the map
-                    //val signInActivityIntent = Intent(applicationContext,Activity::class.java)
-                    //startActivity(signInActivityIntent)
+                    val signInActivityIntent = Intent(applicationContext,UploadAPetActivity::class.java)
+                    startActivity(signInActivityIntent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         val isPasswordValid = password.isNotEmpty()
         val isPasswordLongEnough = password.length
 
-        return isEmailValid && isPasswordValid && (isPasswordLongEnough == 6)
+        return isEmailValid && isPasswordValid && (isPasswordLongEnough >= 6)
     }
 
     private fun isValidEmail(email: String): Boolean {

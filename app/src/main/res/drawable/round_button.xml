@@ -6,4 +6,18 @@
         android:bottomLeftRadius="16dp"
         android:topRightRadius="16dp"
         android:topLeftRadius="16dp"/>
+<!--    <padding-->
+<!--        android:right="16dp"-->
+<!--        android:left="16dp"-->
+<!--        android:top="8dp"-->
+<!--        android:bottom="8dp"-->
+<!--        />--><!--    <padding-->
+<!--        android:right="16dp"-->
+<!--        android:left="16dp"-->
+<!--        android:top="8dp"-->
+<!--        android:bottom="8dp"-->
+<!--        />-->
+
+
+
 </shape>
