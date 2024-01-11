@@ -16,4 +16,18 @@
     <string name="main_label_log_in_success">success</string>
     <string name="main_label_failed_log_in">log in failed, try again</string>
     <string name="title_activity_private_area">PrivateAreaActivity</string>
+    <string name="upload_a_pet_label_title">Upload a pet</string>
+    <string name="upload_a_pet_label_image_of_the_pet_button">+ Image of the pet</string>
+    <string name="upload_a_pet_label_kind">Kind</string>
+    <string name="upload_a_let_label_age">Age</string>
+    <string name="upload_a_pet_label_about">About</string>
+    <string name="upload_a_pet_label_phone_to_connect">Phone To Connect</string>
+    <string name="upload_a_pet_label_upload_button">Upload</string>
+    <string name="upload_a_pet_label_back_to_private_area">Back To Private Area</string>
+    <string name="title_activity_upload_apet">Upload_A_Pet_Activity</string>
+    <string name="upload_a_pet_label_add_img_btn">+ add image</string>
+    <string name="upload_a_pet_upload_btn">upload</string>
+    <string name="upload_a_pet_go_back_btn">go back</string>
+    <string name="upload_a_pet_label_location">location</string>
+    <string name="upload_a_pet_label_owner_name">owner name</string>
 </resources>
