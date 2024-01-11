@@ -15,7 +15,6 @@
             android:layout_height="316dp"
             android:src="@drawable/logo"
 
-
             />
         <View
             android:id="@+id/divider"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/cream"
     android:orientation="vertical">
 
@@ -19,30 +19,29 @@
             android:src="@drawable/logo_pages"
 
             />
+
         <View
             android:id="@+id/divider"
             android:layout_width="wrap_content"
             android:layout_height="3dp"
-            android:background="@color/white" >
-        </View>
+            android:background="@color/white"></View>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        >
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/upload_a_pet_label_title"
-            android:textSize="40sp"
             android:layout_margin="15dp"
             android:fontFamily="@font/handlee"
-            android:textStyle="bold"
-            >
-        </TextView>
+            android:text="@string/upload_a_pet_label_title"
+            android:textSize="40sp"
+            android:textStyle="bold"></TextView>
 
     </LinearLayout>
 
@@ -56,25 +55,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <com.getpet.components.PrimaryButton
                 android:id="@+id/upload_pet_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/upload_a_pet_label_add_img_btn" />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_height="match_parent">
-        <ImageView
-            android:background="@drawable/round_img"
-            android:id="@+id/post_image"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintDimensionRatio="H, 1:1"
-             android:layout_width="0dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp">
+
+                <ImageView
+                    android:id="@+id/post_image"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintDimensionRatio="H, 1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>
@@ -151,19 +151,18 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
 
 
         <com.getpet.components.PrimaryButton
             android:id="@+id/upload_pet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/upload_a_pet_label_upload_button"
-            android:layout_margin="10dp"
             android:layout_gravity="center"
-            />
+            android:layout_margin="10dp"
+            android:text="@string/upload_a_pet_label_upload_button" />
 
         <com.getpet.components.PrimaryButton
             android:id="@+id/go_back_to_map"
@@ -172,10 +171,6 @@
             android:layout_gravity="center"
             android:text="@string/upload_a_pet_go_back_btn" />
 
-
-
-</LinearLayout>
-
-
+    </LinearLayout>
 
 </LinearLayout>

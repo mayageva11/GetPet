@@ -7,24 +7,29 @@ import com.getpet.R
 
 class PrimaryButton : AppCompatButton {
 
+    companion object {
+        val BLOCK_PADDING = 8
+        val INLINE_PADDING = 16
+    }
+
     constructor(context: Context) : super(context) {
-        // Your constructor code here
         init()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        // Your constructor code here
         init()
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        // Your constructor code here
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init()
     }
 
-    // Additional methods or overrides can be added here
-    fun init() {
+    private fun init() {
         this.setBackgroundResource(R.drawable.round_button)
-        setPadding(16, 8, 16, 8)
+        setPadding(INLINE_PADDING, BLOCK_PADDING, INLINE_PADDING, BLOCK_PADDING)
     }
 }
