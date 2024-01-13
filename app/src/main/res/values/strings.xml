@@ -40,4 +40,6 @@
     <string name="upload_a_pet_label_owner_name">owner name</string>
     <string name="register_label_show_password">Show Password</string>
     <string name="register_label_show_confirm_password">Show Confirm Password</string>
+    <string name="private_area_label_confirm_password">confirm password</string>
+    <string name="private_area_label_show_password">show password</string>
 </resources>
