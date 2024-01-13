@@ -38,4 +38,6 @@
     <string name="upload_a_pet_go_back_btn">go back</string>
     <string name="upload_a_pet_label_location">location</string>
     <string name="upload_a_pet_label_owner_name">owner name</string>
+    <string name="register_label_show_password">Show Password</string>
+    <string name="register_label_show_confirm_password">Show Confirm Password</string>
 </resources>
