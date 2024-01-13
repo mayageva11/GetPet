@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.getpet.Constants
@@ -17,6 +21,8 @@ import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private var isPasswordVisible = false
+    private var isConfirmPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +34,21 @@ class RegisterActivity : AppCompatActivity() {
         val userNameEditText: EditText = findViewById(R.id.User_Name)
         val emailEditText: EditText = findViewById(R.id.Email)
         val passwordEditText: EditText = findViewById(R.id.Password)
+        val showPasswordButton: ImageButton = findViewById(R.id.showPasswordButton)
         val confirmPasswordEditText: EditText = findViewById(R.id.Confirm_Password)
+        val showConfirmPasswordButton : ImageButton = findViewById(R.id.showConfirmPasswordButton)
+
+        showPasswordButton.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            togglePasswordVisibility(passwordEditText, isPasswordVisible)
+            updateButtonDrawable(showPasswordButton, isPasswordVisible)
+        }
+
+        showConfirmPasswordButton.setOnClickListener {
+            isConfirmPasswordVisible = !isConfirmPasswordVisible
+            togglePasswordVisibility(confirmPasswordEditText, isConfirmPasswordVisible)
+            updateButtonDrawable(showConfirmPasswordButton, isConfirmPasswordVisible)
+        }
 
         val submitBtn = findViewById<Button>(R.id.submit_btn)
         submitBtn.setOnClickListener {
@@ -100,4 +120,32 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
     }
+    private fun updateButtonDrawable(button: ImageButton, isVisible: Boolean) {
+        val drawableId = if (isVisible) R.drawable.ic_show_password else R.drawable.ic_hide_password
+        button.setImageResource(drawableId)
+    }
+
+    // This function is called when the Show Password button is clicked
+    fun onShowPasswordClick(view: android.view.View) {
+        isPasswordVisible = !isPasswordVisible
+        togglePasswordVisibility(findViewById(R.id.Password), isPasswordVisible)
+        updateButtonDrawable(findViewById(R.id.showPasswordButton), isPasswordVisible)
+    }
+
+    // This function is called when the Show Confirm Password button is clicked
+    fun onShowConfirmPasswordClick(view: android.view.View) {
+        isConfirmPasswordVisible = !isConfirmPasswordVisible
+        togglePasswordVisibility(findViewById(R.id.Confirm_Password), isConfirmPasswordVisible)
+        updateButtonDrawable(findViewById(R.id.showConfirmPasswordButton), isConfirmPasswordVisible)
+    }
+    private fun togglePasswordVisibility(passwordEditText: EditText, isVisible: Boolean) {
+        if (isVisible) {
+            passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        } else {
+            passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+
+        passwordEditText.setSelection(passwordEditText.text.length)
+    }
+
 }
