@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/cream"
+                  android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_pages"
+            android:adjustViewBounds="true">
+        </ImageView>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/white">
+        </View>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_uploads_label_title"
+            android:textSize="40sp"
+            android:layout_margin="25dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/handlee"
+            android:textColor="@color/textColor">
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <ScrollView
+            android:id="@+id/scroll_my_uploads"
+            android:layout_width="400dp"
+            android:layout_height="450dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/my_upload_label_scrolling"
+            >
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_button"
+            android:text="@string/my_uploads_label_back_to_private_area"
+            android:textColor="@color/textColor"
+            android:textStyle="bold"
+            android:layout_margin="25dp"
+            android:textSize="15sp">
+
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

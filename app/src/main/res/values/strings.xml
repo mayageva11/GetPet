@@ -16,4 +16,7 @@
     <string name="main_label_log_in_success">success</string>
     <string name="main_label_failed_log_in">log in failed, try again</string>
     <string name="title_activity_private_area">PrivateAreaActivity</string>
+    <string name="my_uploads_label_title">My Uploads</string>
+    <string name="my_uploads_label_back_to_private_area">Back To Private Area</string>
+    <string name="my_upload_label_scrolling">scrolling</string>
 </resources>

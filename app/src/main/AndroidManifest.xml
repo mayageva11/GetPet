@@ -13,6 +13,9 @@
         android:theme="@style/Theme.GetPet"
         tools:targetApi="31">
         <activity
+            android:name=".activities.MyUploadsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.RegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_register"
@@ -35,11 +38,11 @@
             android:name=".activities.PrivateAreaActivity"
             android:exported="true"
             android:label="@string/title_activity_private_area"
-            android:theme="@style/Theme.GetPet">
-        </activity>
+            android:theme="@style/Theme.GetPet"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>
