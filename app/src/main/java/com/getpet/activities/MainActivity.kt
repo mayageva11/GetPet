@@ -2,10 +2,14 @@ package com.getpet.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.getpet.Constants
 import com.getpet.R
 import com.getpet.R.*
 import com.google.firebase.auth.FirebaseAuth
@@ -14,7 +18,7 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
-
+    private var isPasswordTextVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +26,19 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+
+
         val emailEditText: EditText = findViewById(id.EmailText)
         val passwordEditText: EditText = findViewById(id.PasswordText)
+        val showPasswordTextButton: ImageButton = findViewById(R.id.showPasswordTextButton)
+
+        // Set the default state to invisible
+        passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+        showPasswordTextButton.setOnClickListener {
+            isPasswordTextVisible = !isPasswordTextVisible
+            togglePasswordVisibility(passwordEditText, isPasswordTextVisible)
+            updateButtonDrawable(showPasswordTextButton, isPasswordTextVisible)
+        }
 
         val logInButton = findViewById<Button>(id.LogIn_Btn)
         logInButton.setOnClickListener {
@@ -51,23 +66,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Toast.makeText(
-                        this, getString(string.main_label_log_in_success), Toast.LENGTH_SHORT
-                    ).show()
-                    //TODO: add intent activity to the next activity- to the map
-                    //val signInActivityIntent = Intent(applicationContext,Activity::class.java)
-                    //startActivity(signInActivityIntent)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(
-                        this, getString(string.main_label_failed_log_in), Toast.LENGTH_SHORT
-                    ).show()
-                }
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                // Sign in success, update UI with the signed-in user's information
+                Toast.makeText(
+                    this, getString(string.main_label_log_in_success), Toast.LENGTH_SHORT
+                ).show()
+                //TODO: add intent activity to the next activity- to the map
+                val signInActivityIntent =
+                    Intent(applicationContext, PrivateAreaActivity::class.java)
+                startActivity(signInActivityIntent)
+            } else {
+                // If sign in fails, display a message to the user.
+                Toast.makeText(
+                    this, getString(string.main_label_failed_log_in), Toast.LENGTH_SHORT
+                ).show()
             }
+        }
     }
 
     private fun validateSignIn(email: String, password: String): Boolean {
@@ -75,12 +90,33 @@ class MainActivity : AppCompatActivity() {
         val isPasswordValid = password.isNotEmpty()
         val isPasswordLongEnough = password.length
 
-        return isEmailValid && isPasswordValid && (isPasswordLongEnough == 6)
+        return isEmailValid && isPasswordValid && (isPasswordLongEnough >= Constants.PASS_MIN_LENGTH)
     }
 
     private fun isValidEmail(email: String): Boolean {
         val emailPattern = android.util.Patterns.EMAIL_ADDRESS
         return emailPattern.matcher(email).matches()
+    }
+    private fun togglePasswordVisibility(passwordEditText: EditText, isVisible: Boolean) {
+        if (isVisible) {
+            passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        } else {
+            passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+
+        passwordEditText.setSelection(passwordEditText.text.length)
+    }
+
+    private fun updateButtonDrawable(button: ImageButton, isVisible: Boolean) {
+        val drawableId = if (isVisible) R.drawable.ic_show_password else R.drawable.ic_hide_password
+        button.setImageResource(drawableId)
+    }
+
+    // This function is called when the Show Password Text button is clicked
+    fun onShowPasswordTextClick(view: android.view.View) {
+        isPasswordTextVisible = !isPasswordTextVisible
+        togglePasswordVisibility(findViewById(R.id.PasswordText), isPasswordTextVisible)
+        updateButtonDrawable(findViewById(R.id.showPasswordTextButton), isPasswordTextVisible)
     }
 
 }

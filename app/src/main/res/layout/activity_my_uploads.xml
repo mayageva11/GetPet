@@ -45,17 +45,29 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="450dp"
         android:layout_gravity="center">
-        <ScrollView
-            android:id="@+id/scroll_my_uploads"
-            android:layout_width="400dp"
-            android:layout_height="450dp"
+<!--        <ScrollView-->
+<!--            android:id="@+id/scroll_my_uploads"-->
+<!--            android:layout_width="400dp"-->
+<!--            android:layout_height="450dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:contentDescription="@string/my_upload_label_scrolling">-->
+
+<!--        </ScrollView>-->
+        <!-- Inside my_uploads.xml, replace the ScrollView with RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:contentDescription="@string/my_upload_label_scrolling"
-            >
-        </ScrollView>
+            android:clipToPadding="false"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
+
 
 
     </LinearLayout>
@@ -63,95 +75,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-        <Button
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <com.getpet.components.PrimaryButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_button"
-            android:text="@string/my_uploads_label_back_to_private_area"
-            android:textColor="@color/textColor"
-            android:textStyle="bold"
-            android:layout_margin="25dp"
-            android:textSize="15sp">
-
-        </Button>
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="@string/my_uploads_label_back_to_private_area"/>
 
     </LinearLayout>
 
 </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -15,8 +15,13 @@
             android:layout_height="316dp"
             android:src="@drawable/logo"
 
-
             />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:background="@color/white" >
+        </View>
 
     </LinearLayout>
 
@@ -28,7 +33,7 @@
 
         <EditText
             android:id="@+id/User_Name"
-            android:layout_width="250dp"
+            android:layout_width="280dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_name"
@@ -39,7 +44,7 @@
 
         <EditText
             android:id="@+id/Email"
-            android:layout_width="250dp"
+            android:layout_width="280dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_email"
@@ -47,59 +52,94 @@
             android:textColor="@color/textColor"
             android:textSize="20sp"
             android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
 
         <EditText
             android:id="@+id/Password"
-            android:layout_width="250dp"
+            android:layout_width="280dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_password"
             android:hint="@string/register_label_password"
             android:textColor="@color/textColor"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginStart="6dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/showPasswordButton"
+            android:inputType="textPassword"
+            />
 
-        <EditText
-            android:id="@+id/Confirm_Password"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
+        <ImageButton
+            android:id="@+id/showPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_horizontal"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/register_label_show_password"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_hide_password"
+            android:onClick="onShowPasswordClick"/>
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_password"
-            android:hint="@string/register_label_confirm_password"
-            android:textColor="@color/textColor"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_below="@id/Password"
+            android:layout_marginTop="16dp">
 
-        <Button
+            <!-- Confirm Password Field -->
+            <EditText
+                android:id="@+id/Confirm_Password"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_password"
+                android:hint="@string/register_label_confirm_password"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="-10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/showConfirmPasswordButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_horizontal"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/register_label_show_confirm_password"
+                android:padding="8dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_hide_password"
+                android:onClick="onShowConfirmPasswordClick"/>
+        </RelativeLayout>
+
+        <com.getpet.components.PrimaryButton
             android:id="@+id/submit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/round_button"
-            android:onClick="onSubmitClick"
             android:text="@string/register_label_submit"
-            android:textColor="@color/textColor"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <Button
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:onClick="onSubmitClick"
+            />
+        <com.getpet.components.PrimaryButton
             android:id="@+id/goBack_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/round_button"
             android:onClick="onGoBackClick"
             android:text="@string/register_label_go_back"
-            android:textColor="@color/textColor"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-
+            />
     </LinearLayout>
-
-
 </LinearLayout>
