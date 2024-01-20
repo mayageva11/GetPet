@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/logo" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/EmailText"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_email"
+            android:hint="@string/main_label_email"
+            android:textColor="@color/textColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp">
+
+            <!-- Password Field -->
+            <EditText
+                android:id="@+id/PasswordText"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_password"
+                android:hint="@string/main_label_password"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="52dp"
+                />
+
+            <ImageButton
+                android:id="@+id/showPasswordTextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_horizontal"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/main_label_password"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_hide_password"
+                android:onClick="onShowPasswordTextClick"/>
+
+        </RelativeLayout>
+
+
+<!--        <EditText-->
+<!--            android:id="@+id/PasswordText"-->
+<!--            android:layout_width="250dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:drawableStart="@drawable/ic_password"-->
+<!--            android:hint="@string/main_label_password"-->
+<!--            android:textColor="@color/textColor"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold" />-->
+
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/LogIn_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@string/main_label_login"
+             />
+
+    </LinearLayout>
+
+    <com.getpet.components.PrimaryButton
+        android:id="@+id/register_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="@string/main_label_click_here_to_register"
+         />
+</LinearLayout>
