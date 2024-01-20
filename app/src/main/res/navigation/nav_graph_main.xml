@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/profileFragment">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.getpet.Fragments.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/uploadAPetFragment"
+        android:name="com.getpet.Fragments.UploadAPetFragment"
+        android:label="UploadAPetFragment" />
+
+    <action
+        android:id="@+id/action_global_uploadAPetFragment"
+        app:destination="@id/uploadAPetFragment" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.getpet.Fragments.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <action
+        android:id="@+id/action_global_mapFragment"
+        app:destination="@id/mapFragment" />
+    <fragment
+        android:id="@+id/myUploadsFragment"
+        android:name="com.getpet.Fragments.MyUploadsFragment"
+        android:label="fragment_my_uploads"
+        tools:layout="@layout/fragment_my_uploads" />
+    <action
+        android:id="@+id/action_global_myUploadsFragment"
+        app:destination="@id/myUploadsFragment" />
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment" />
+</navigation>

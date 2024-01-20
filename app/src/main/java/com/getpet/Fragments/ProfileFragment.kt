@@ -1,25 +1,26 @@
-package com.getpet.activities
-
+package com.getpet.Fragments
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Patterns
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import com.getpet.Constants
 import com.getpet.R
+import com.getpet.activities.LoginActivity
 import com.getpet.components.PrimaryButton
-import com.getpet.databinding.ActivityPrivateAreaBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class PrivateAreaActivity : AppCompatActivity() {
+class ProfileFragment : Fragment() {
     private lateinit var changeConfirmPasswordEditText: EditText
     private lateinit var changePasswordEditText: EditText
     private lateinit var resetPasswordButton: PrimaryButton
@@ -27,45 +28,36 @@ class PrivateAreaActivity : AppCompatActivity() {
     private var isChangePasswordTextVisible = false
     private var isChangeConfirmPasswordVisible = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_private_area)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Initialize Firebase Authentication
-         auth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        //my uploads button
-        val myUploadsBtn = findViewById<Button>(R.id.transfer_to_my_upload_page)
-        myUploadsBtn.setOnClickListener{
-            //val MyUploadsIntent = Intent(applicationContext, MyUploadsActivity::class.java)
-           // startActivity(MyUploadsIntent)
-        }
-        //upload a pet button
-        val uploadAPetBtn= findViewById<Button>(R.id.transfer_to_upload_a_pet_page)
-        uploadAPetBtn.setOnClickListener{
-            val uploadAPetActivityIntent = Intent(applicationContext, UploadAPetActivity::class.java)
-            startActivity(uploadAPetActivityIntent)
-        }
 
         //log out button
-        val logOutBtn = findViewById<Button>(R.id.logout)
+        val logOutBtn = view.findViewById<Button>(R.id.logout)
         logOutBtn.setOnClickListener{
-            val logOutActivityIntent = Intent(applicationContext, MainActivity::class.java)
+            auth.signOut()
+            val logOutActivityIntent = Intent(context, LoginActivity::class.java)
             startActivity(logOutActivityIntent)
         }
-        // go back to home page - map page
-        val goBackToHomePageBtn = findViewById<Button>(R.id.private_area_go_back)
-        goBackToHomePageBtn.setOnClickListener{
-            //val goBackToHomePageActivityIntent = Intent(applicationContext, MapActivity::class.java)
-            //startActivity(goBackToHomePageActivityIntent)
-        }
+
 
         // Find views
-        changePasswordEditText = findViewById(R.id.change_password)
-        changeConfirmPasswordEditText = findViewById(R.id.change_confirm_password)
-        val showChangePasswordButton: ImageButton = findViewById(R.id.showChangePasswordButton)
-        val showChangeConfirmPasswordButton :ImageButton = findViewById(R.id.showChangeConfirmPasswordButton)
-        resetPasswordButton = findViewById(R.id.reset_password_btn)
+        changePasswordEditText = view.findViewById(R.id.change_password)
+        changeConfirmPasswordEditText = view.findViewById(R.id.change_confirm_password)
+        val showChangePasswordButton: ImageButton = view.findViewById(R.id.showChangePasswordButton)
+        val showChangeConfirmPasswordButton : ImageButton = view.findViewById(R.id.showChangeConfirmPasswordButton)
+        resetPasswordButton = view.findViewById(R.id.reset_password_btn)
 
         showChangePasswordButton.setOnClickListener {
             isChangePasswordTextVisible = ! isChangePasswordTextVisible
@@ -81,25 +73,26 @@ class PrivateAreaActivity : AppCompatActivity() {
 
         // Set onClickListener for resetPasswordButton
         resetPasswordButton.setOnClickListener {
-            handleChangeEmailPassword()
+            handleChangePassword()
         }
     }
-    private fun handleChangeEmailPassword() {
+
+    private fun handleChangePassword() {
         val newPassword = changePasswordEditText.text.toString().trim()
         val newConfirmPassword =changeConfirmPasswordEditText.text.toString().trim()
 
         if(newPassword== null || newConfirmPassword== null){
-            Toast.makeText(this, "please fill all the information", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "please fill all the information", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (newPassword.length < Constants.PASS_MIN_LENGTH) {
-            Toast.makeText(this, "password need to be at least 6 characters",
+            Toast.makeText(context, "password need to be at least 6 characters",
                 Toast.LENGTH_SHORT).show()
             return
         }
         if(newPassword != newConfirmPassword){
-            Toast.makeText(this, "please make sure that the password in the same",
+            Toast.makeText(context, "please make sure that the password in the same",
                 Toast.LENGTH_SHORT).show()
             return
         }
@@ -107,7 +100,7 @@ class PrivateAreaActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
         if(user!=null){
             user.updatePassword(newPassword)
-            Toast.makeText(this, "success, password changed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "success, password changed", Toast.LENGTH_SHORT).show()
 
         }
     }
@@ -119,15 +112,15 @@ class PrivateAreaActivity : AppCompatActivity() {
     // This function is called when the Show Password button is clicked
     fun onShowPasswordClick(view: android.view.View) {
         isChangePasswordTextVisible  = !isChangePasswordTextVisible
-        togglePasswordVisibility(findViewById(R.id.Password), isChangePasswordTextVisible )
-        updateButtonDrawable(findViewById(R.id.showPasswordButton), isChangePasswordTextVisible )
+        togglePasswordVisibility(view.findViewById(R.id.Password), isChangePasswordTextVisible )
+        updateButtonDrawable(view.findViewById(R.id.showPasswordButton), isChangePasswordTextVisible )
     }
 
     // This function is called when the Show Confirm Password button is clicked
     fun onShowConfirmPasswordClick(view: android.view.View) {
         isChangeConfirmPasswordVisible = !isChangeConfirmPasswordVisible
-        togglePasswordVisibility(findViewById(R.id.Confirm_Password), isChangeConfirmPasswordVisible)
-        updateButtonDrawable(findViewById(R.id.showConfirmPasswordButton), isChangeConfirmPasswordVisible)
+        togglePasswordVisibility(view.findViewById(R.id.Confirm_Password), isChangeConfirmPasswordVisible)
+        updateButtonDrawable(view.findViewById(R.id.showConfirmPasswordButton), isChangeConfirmPasswordVisible)
     }
     private fun togglePasswordVisibility(passwordEditText: EditText, isVisible: Boolean) {
         if (isVisible) {
@@ -138,6 +131,5 @@ class PrivateAreaActivity : AppCompatActivity() {
 
         passwordEditText.setSelection(passwordEditText.text.length)
     }
-
 
 }

@@ -1,87 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/cream"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:orientation="vertical">
 
+        <!-- Profile Picture ImageView -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_pages"
-        android:adjustViewBounds="true">
-    </ImageView>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="wrap_content"
-        android:layout_height="3dp"
-        android:background="@color/white" >
-    </View>
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="match_parent"
+            android:src="@drawable/default_profile"
+            android:scaleType="centerCrop"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/profile_picture_description" />
+        <ImageButton
+            android:id="@+id/change_profile_pic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_add_profile"
+            android:background="@color/transparent"
+            android:layout_marginTop="-60dp"
+            android:layout_marginStart="10dp"
+            />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/private_area_label_title"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:text="@string/profile_label_title"
         android:textSize="40sp"
-        android:layout_margin="25dp"
         android:textStyle="bold"
         android:fontFamily="@font/handlee"
         android:textColor="@color/textColor">
     </TextView>
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="10dp"
-        android:layout_gravity="center">
-
-        <com.getpet.components.PrimaryButton
-            android:id="@+id/transfer_to_my_upload_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="20dp"
-            android:text="@string/private_area_label_my_uploads" />
-
-        <com.getpet.components.PrimaryButton
-            android:id="@+id/transfer_to_upload_a_pet_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/private_area_label_upload_a_pet" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:paddingHorizontal="20dp">
     <TextView
         android:id="@+id/change_a_password_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/raleway"
-        android:text="@string/private_area_label_change_your_password_title"
+        android:text="@string/edit_profile"
         android:textColor="@color/textColor"
         android:textSize="25sp"
         android:textStyle="bold">
     </TextView>
+        <EditText
+            android:id="@+id/change_email"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_email"
+            android:hint="@string/profile_label_email"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="6dp"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -164,32 +156,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="@string/private_area_label_reset_password" />
+            android:text="@string/save_changes" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
 
         <com.getpet.components.PrimaryButton
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="@string/private_area_label_logout" />
-
-
-
-        <com.getpet.components.PrimaryButton
-            android:id="@+id/private_area_go_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/private_area_label_back_to_home_page" />
-    </LinearLayout>
 
 </LinearLayout>

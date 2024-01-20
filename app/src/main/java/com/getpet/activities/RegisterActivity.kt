@@ -1,14 +1,10 @@
 package com.getpet.activities
 
-import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
@@ -72,7 +68,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val goBackBtn = findViewById<Button>(R.id.goBack_btn)
         goBackBtn.setOnClickListener {
-            val goBackActivityIntent = Intent(applicationContext, MainActivity::class.java)
+            val goBackActivityIntent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(goBackActivityIntent)
         }
     }
@@ -109,7 +105,7 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     //go to main activity to sign in
-                    val submitActivityIntent = Intent(applicationContext, MainActivity::class.java)
+                    val submitActivityIntent = Intent(applicationContext, LoginActivity::class.java)
                     startActivity(submitActivityIntent)
                 } else {
                     // show a failure message

@@ -1,24 +1,29 @@
-package com.getpet.activities
+package com.getpet.Fragments
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.getpet.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.ktx.auth
 
-class UploadAPetActivity : AppCompatActivity() {
+class UploadAPetFragment : Fragment() {
+
+
     lateinit var auth: FirebaseAuth
     val db = Firebase.firestore
 
@@ -33,46 +38,43 @@ class UploadAPetActivity : AppCompatActivity() {
                 imageUri = it
                 //upload the image to Firebase Storage
                 uploadImage()
-
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_upload_a_pet)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_upload_a_pet, container, false)
+    }
 
-        imageView = findViewById(R.id.post_image)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        imageView = view.findViewById(R.id.post_image)
 
         // Initialize Firebase Storage
         storageRef = FirebaseStorage.getInstance().reference
-        //TODO: activate upload image button
-        val uploadImgBtn = findViewById<Button>(R.id.upload_pet_img)
+        //upload button
+        val uploadImgBtn = view.findViewById<Button>(R.id.upload_pet_img)
         uploadImgBtn.setOnClickListener {
 
             imagePicker.launch("image/*")
-        }
-
-        //TODO: activate go back btn to map page
-        val goBackBtn = findViewById<Button>(R.id.go_back_to_map)
-        goBackBtn.setOnClickListener {
-            //TODO: change to the correct page- map
-            val goBackActivityIntent = Intent(applicationContext, PrivateAreaActivity::class.java)
-            startActivity(goBackActivityIntent)
         }
 
         //get the  current user
         val user = Firebase.auth.currentUser
 
         // save all the information from the user
-        val kindEditText: EditText = findViewById(R.id.kind_of_a_pet)
-        val ageEditText: EditText = findViewById(R.id.age_of_a_pet)
-        val aboutEditText: EditText = findViewById(R.id.about_of_a_pet)
-        val phoneEditText: EditText = findViewById(R.id.phone_of_a_pet)
-        val locationEditText: EditText = findViewById(R.id.location_of_a_pet)
-        val ownerEditText: EditText = findViewById(R.id.owner_of_a_pet)
+        val kindEditText: EditText = view.findViewById(R.id.kind_of_a_pet)
+        val ageEditText: EditText = view.findViewById(R.id.age_of_a_pet)
+        val aboutEditText: EditText = view.findViewById(R.id.about_of_a_pet)
+        val phoneEditText: EditText = view.findViewById(R.id.phone_of_a_pet)
+        val locationEditText: EditText = view.findViewById(R.id.location_of_a_pet)
+        val ownerEditText: EditText = view.findViewById(R.id.owner_of_a_pet)
 
-        //TODO: activate upload button
-        val uploadPostBtn = findViewById<Button>(R.id.upload_pet)
+        // activate upload button
+        val uploadPostBtn = view.findViewById<Button>(R.id.upload_pet)
         uploadPostBtn.setOnClickListener {
             val kind = kindEditText.text.toString()
             val age = ageEditText.text.toString()
@@ -100,27 +102,23 @@ class UploadAPetActivity : AppCompatActivity() {
                     //upload
                     docRef.set(data).addOnSuccessListener {
                         // Document uploaded successfully
-                        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
-                        //TODO: show the user my uploads activity with his new post
-
-//                         val uploadPostActivityIntent = Intent(applicationContext, MyUploadsActivity::class.java)
-//                         startActivity(uploadPostActivityIntent)
+                        Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
+                        //show the user my uploads activity with his new post
+                         val uploadPostActivityIntent = Intent(context, MyUploadsFragment::class.java)
+                         startActivity(uploadPostActivityIntent)
                     }.addOnFailureListener { e ->
                         // Handle the failure
-                        Toast.makeText(this, "Upload failed: ${e.message}", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "Upload failed: ${e.message}", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
             } else {
                 // Handle the failure
-                Toast.makeText(this, "please fill all the info correctly", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "please fill all the info correctly", Toast.LENGTH_SHORT)
                     .show()
-
             }
         }
-
     }
-
     private fun validate(
         kind: String, age: String, about: String, phone: String, location: String, owner: String
 
@@ -144,20 +142,22 @@ class UploadAPetActivity : AppCompatActivity() {
                 .getReference("imagePosts/${System.currentTimeMillis()}.jpg")
             storageReference.putFile(it).addOnSuccessListener { taskSnapshot ->
                 // Image uploaded successfully
-                Toast.makeText(this, "Image uploaded", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Image uploaded", Toast.LENGTH_SHORT).show()
                 // Get the download URL of the uploaded image
                 storageReference.downloadUrl.addOnSuccessListener { downloadUri ->
                     val imageUrl = downloadUri.toString()
                     // Load the image into your ImageView using Glide
                     Glide.with(this).load(imageUrl).into(imageView)
+                }.addOnFailureListener {e ->
+                    // Handle failed upload
+                    Toast.makeText(context, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
 
             }.addOnFailureListener { e ->
                 // Handle failed upload
-
-                // TODO: Convert to a string resource.
-                Toast.makeText(this, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
+
