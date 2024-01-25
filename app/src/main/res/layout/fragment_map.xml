@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragments.MapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/map_content_description" />
 
-</FrameLayout>
+</RelativeLayout>
+
+
+
+    <!--    <LinearLayout-->
+<!--        android:id="@+id/search_contaier"-->
+<!--        android:layout_width="416dp"-->
+<!--        android:layout_height="153dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:paddingBottom="10dp"-->
+<!--        tools:layout_editor_absoluteX="-4dp"-->
+<!--        tools:ignore="MissingConstraints">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/ed_search"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginHorizontal="24dp"-->
+<!--            android:layout_marginVertical="8dp"-->
+<!--            android:background="@android:drawable/editbox_background"-->
+<!--            android:drawableLeft="@drawable/ic_search"-->
+<!--            android:fontWeight="400"-->
+<!--            android:hint="search by location / kind"-->
+<!--            android:padding="10dp"-->
+<!--            android:textAlignment="viewStart"-->
+<!--            android:textColor="@color/textColor" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/search_bt"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/round_button"-->
+<!--            android:text="Search"-->
+<!--            android:textColor="@color/textColor"-->
+<!--            android:textFontWeight="600" />-->
+
+<!--    </LinearLayout>-->
+
