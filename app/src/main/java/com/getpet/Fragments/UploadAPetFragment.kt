@@ -31,6 +31,7 @@ class UploadAPetFragment : Fragment() {
     private lateinit var storageRef: StorageReference
     private var imageUri: Uri? = null
     private lateinit var imageView: ImageView
+    private lateinit var imageUrlRef : String
 
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -82,6 +83,7 @@ class UploadAPetFragment : Fragment() {
             val phone = phoneEditText.text.toString()
             val location = locationEditText.text.toString()
             val owner = ownerEditText.text.toString()
+            val image = imageUrlRef
             // validate the information
             if (validate(kind, age, about, phone, location, owner)) {
                 // upload a collection to storage
@@ -97,7 +99,8 @@ class UploadAPetFragment : Fragment() {
                         "phone" to phone,
                         "location" to location,
                         "owner" to owner,
-                        "uid" to uid
+                        "uid" to uid,
+                        "image" to image
                     )
                     //upload
                     docRef.set(data).addOnSuccessListener {
@@ -146,6 +149,7 @@ class UploadAPetFragment : Fragment() {
                 // Get the download URL of the uploaded image
                 storageReference.downloadUrl.addOnSuccessListener { downloadUri ->
                     val imageUrl = downloadUri.toString()
+                    imageUrlRef= imageUrl
                     // Load the image into your ImageView using Glide
                     Glide.with(this).load(imageUrl).into(imageView)
                 }.addOnFailureListener {e ->

@@ -1,4 +1,4 @@
 package com.getpet.Model.ModelFireBase
 
-class RegisterFirebase {
+class PostFB {
 }
