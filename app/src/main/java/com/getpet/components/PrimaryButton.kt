@@ -1,6 +1,5 @@
 package com.getpet.components
 
-import android.R
 import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
@@ -37,7 +36,7 @@ class PrimaryButton : AppCompatButton {
     private fun init() {
         this.setBackgroundResource(Resources.drawable.round_button)
         setPadding(INLINE_PADDING, BLOCK_PADDING, INLINE_PADDING, BLOCK_PADDING)
-        val typeface: Typeface? = ResourcesCompat.getFont(context, com.getpet.R.font.raleway)
+        val typeface: Typeface? = ResourcesCompat.getFont(context, com.getpet.R.font.text_font_raleway)
         setTypeface(typeface, Typeface.BOLD)
         isAllCaps = false
         val newTextColor = ContextCompat.getColor(context, Resources.color.textColor)

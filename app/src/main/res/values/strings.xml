@@ -36,8 +36,8 @@
     <string name="upload_a_pet_label_add_img_btn">+ add image</string>
     <string name="upload_a_pet_upload_btn">upload</string>
     <string name="upload_a_pet_go_back_btn">go back</string>
-    <string name="upload_a_pet_label_location">location</string>
-    <string name="upload_a_pet_label_owner_name">owner name</string>
+    <string name="upload_a_pet_label_location">Location</string>
+    <string name="upload_a_pet_label_owner_name">Owner Name</string>
     <string name="register_label_show_password">Show Password</string>
     <string name="register_label_show_confirm_password">Show Confirm Password</string>
     <string name="private_area_label_confirm_password">confirm password</string>
@@ -54,8 +54,16 @@
     <string name="main_label_my_posts">my posts</string>
     <string name="main_label_map_fragment">map</string>
     <string name="profile_label_title">Profile</string>
-    <string name="profile_picture_description">profite pic</string>
+    <string name="profile_picture_description">profile pic</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="save_changes">save changes</string>
     <string name="profile_label_email">Email</string>
+    <string name="activity_single_post_label_pet_details">Pet Details</string>
+    <string name="activity_single_post_label_back">back</string>
+    <string name="activity_single_post_label_kind">Kind:</string>
+    <string name="activity_single_post_label_age">Age:</string>
+    <string name="activity_single_post_label_about">About:</string>
+    <string name="activity_single_post_label_phone_to_connect">Phone to connect:</string>
+    <string name="activity_single_post_label_location">Location:</string>
+    <string name="activity_single_post_label_owner_name">Owner Name:</string>
 </resources>

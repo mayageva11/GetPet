@@ -12,11 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.getpet.R
 import com.getpet.activities.ui.theme.GetPetTheme
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-class SinglePostActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class SinglePostActivity : ComponentActivity()
+{
+    val db = Firebase.firestore
+    val collectionReference = db.collection("posts")
+    val documentId = "AjBPrqT943TDqNow8yU2it8OoIc2"
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_post)
     }
 }
-
