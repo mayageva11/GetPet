@@ -59,4 +59,5 @@
     <string name="save_changes">save changes</string>
     <string name="profile_label_email">Email</string>
     <string name="add_profile_image">+ profile image</string>
+    <string name="map_content_description">Google Map</string>
 </resources>
