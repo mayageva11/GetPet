@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.getpet.Fragments.MapFragment
 import com.getpet.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         //TODO: react to button push in the bottom navigation using the controller
         bottomNav.setOnItemSelectedListener {
             when(it.itemId){
+
                 R.id.profile_fragment -> {
                     navController.navigate(R.id.action_global_profileFragment)
                 }
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.my_post_fragment -> {
                     navController.navigate(R.id.action_global_myUploadsFragment)
                 }
-                R.id.map_fragment -> {
+                R.id.map_fragment-> {
                     navController.navigate(R.id.action_global_mapFragment)
                 }
             }
