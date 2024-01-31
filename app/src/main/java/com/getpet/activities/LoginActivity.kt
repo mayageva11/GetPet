@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.getpet.Constants
 import com.getpet.R
 import com.getpet.R.*
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

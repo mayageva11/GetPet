@@ -32,6 +32,7 @@
             android:drawableStart="@drawable/ic_email"
             android:hint="@string/main_label_email"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
         <RelativeLayout
@@ -50,6 +51,7 @@
                 android:drawableStart="@drawable/ic_password"
                 android:hint="@string/main_label_password"
                 android:textColor="@color/textColor"
+                android:fontFamily="@font/raleway"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginStart="52dp"
@@ -70,26 +72,13 @@
 
         </RelativeLayout>
 
-
-<!--        <EditText-->
-<!--            android:id="@+id/PasswordText"-->
-<!--            android:layout_width="250dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:drawableStart="@drawable/ic_password"-->
-<!--            android:hint="@string/main_label_password"-->
-<!--            android:textColor="@color/textColor"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textStyle="bold" />-->
-
         <com.getpet.components.PrimaryButton
             android:id="@+id/LogIn_Btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="@string/main_label_login"
-             />
+            android:text="@string/main_label_login" />
 
     </LinearLayout>
 
@@ -101,4 +90,6 @@
         android:layout_margin="10dp"
         android:text="@string/main_label_click_here_to_register"
          />
+
+
 </LinearLayout>

@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+
 class ProfileFragment : Fragment() {
     private lateinit var changeConfirmPasswordEditText: EditText
     private lateinit var changePasswordEditText: EditText

@@ -39,6 +39,7 @@
             android:drawableStart="@drawable/ic_name"
             android:hint="@string/register_label_name"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -50,6 +51,7 @@
             android:drawableStart="@drawable/ic_email"
             android:hint="@string/register_label_email"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
     <RelativeLayout
@@ -67,6 +69,7 @@
             android:drawableStart="@drawable/ic_password"
             android:hint="@string/register_label_password"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginStart="6dp"
@@ -105,6 +108,7 @@
                 android:drawableStart="@drawable/ic_password"
                 android:hint="@string/register_label_confirm_password"
                 android:textColor="@color/textColor"
+                android:fontFamily="@font/raleway"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginStart="56dp"
