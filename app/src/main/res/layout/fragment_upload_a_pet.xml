@@ -65,6 +65,7 @@
             android:drawableStart="@drawable/ic_name"
             android:hint="@string/upload_a_pet_label_kind"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -76,6 +77,7 @@
             android:drawableStart="@drawable/ic_age"
             android:hint="@string/upload_a_let_label_age"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -87,6 +89,7 @@
             android:drawableStart="@drawable/ic_add"
             android:hint="@string/upload_a_pet_label_about"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -98,6 +101,7 @@
             android:drawableStart="@drawable/ic_phone"
             android:hint="@string/upload_a_pet_label_phone_to_connect"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -109,6 +113,7 @@
             android:drawableStart="@drawable/ic_location"
             android:hint="@string/upload_a_pet_label_location"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -120,6 +125,7 @@
             android:drawableStart="@drawable/ic_name"
             android:hint="@string/upload_a_pet_label_owner_name"
             android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
