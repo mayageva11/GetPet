@@ -4,69 +4,21 @@ import androidx.lifecycle.LiveData
 import com.getpet.GetPetApplication
 import com.getpet.Model.Entities.PostEntity
 import com.getpet.Model.ModelRoom.AppLocalDB
+import com.getpet.Model.ModelRoom.Dao.PostDao
+import java.util.LinkedList
 
 
 class PostModel {
-
-    fun getAllPosts(): AllPostsLiveData {
-        return AllPostsLiveData()
+    fun getAllPosts(): List<PostEntity> {
+        return AppLocalDB.getInstance().postDao().getAllPosts()
     }
 
-    inner class AllPostsLiveData: LiveData<List<PostEntity>> {
-        constructor() {
-            GetPetApplication.getExecutorService().execute{
-                value = AppLocalDB.getInstance().postDao().getAllPosts()
-            }
-        }
+    fun insertPost(post: PostEntity) {
+        val db = AppLocalDB.getInstance().postDao().insertPost(post)
     }
 
-    inner class InsertPostLiveData: LiveData<PostEntity> {
-        constructor(dataToInsert: PostEntity) {
-            AppLocalDB.getInstance().postDao().insertPost(dataToInsert)
-        }
+    fun getPostsByUid(uid: String) : List<PostEntity> {
+        return AppLocalDB.getInstance().postDao().getPostsByUserId(uid)
     }
 
-    fun getPostsByUserId(userId: String): PostByUidLiveData {
-        return PostByUidLiveData(userId)
-    }
-
-    inner class PostByUidLiveData(uid: String) : LiveData<List<PostEntity>>() {
-        init {
-            GetPetApplication.getExecutorService().execute {
-                value = AppLocalDB.getInstance().postDao().getPostsByUserId(uid)
-            }
-        }
-    }
-
-    inner class UpdatePostLiveData(private val updatedPost: PostEntity) : LiveData<Boolean>() {
-        init {
-            GetPetApplication.getExecutorService().execute {
-                try {
-                    AppLocalDB.getInstance().postDao().updatePost(updatedPost)
-                    postValue(true)
-                } catch (e: Exception) {
-                    postValue(false)
-                }
-            }
-        }
-    }
-
-    fun updatePost(post: PostEntity): UpdatePostLiveData {
-        return UpdatePostLiveData(post)
-    }
-    inner class DeletePostLiveData(private val post: PostEntity) : LiveData<Boolean>() {
-        init {
-            GetPetApplication.getExecutorService().execute {
-                try {
-                    AppLocalDB.getInstance().postDao().deletePost(post)
-                    postValue(true)
-                } catch (e: Exception) {
-                    postValue(false)
-                }
-            }
-        }
-    }
-    fun deletePost(post: PostEntity): DeletePostLiveData {
-        return DeletePostLiveData(post)
-    }
 }

@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.getpet.R
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +34,7 @@ class UploadAPetFragment : Fragment() {
     private lateinit var imageView: ImageView
     private lateinit var imageUrlRef : String
 
+
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
@@ -52,6 +54,8 @@ class UploadAPetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //call view model
+
         imageView = view.findViewById(R.id.post_image)
 
         // Initialize Firebase Storage

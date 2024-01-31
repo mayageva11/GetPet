@@ -10,7 +10,7 @@ import com.getpet.Model.ModelRoom.Dao.UserDao
 import com.getpet.Model.Entities.PostEntity
 import com.getpet.Model.Entities.UserEntity
 
-@Database(entities = [UserEntity::class, PostEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserEntity::class, PostEntity::class], version = 2, exportSchema = false)
 abstract class AppLocalDB : RoomDatabase() {
 
     abstract fun userDao(): UserDao
@@ -18,20 +18,18 @@ abstract class AppLocalDB : RoomDatabase() {
 
     companion object {
         // Define a singleton instance of the database
-        @Volatile
-        private var INSTANCE: AppLocalDB? = null
+        @Volatile private var instance: AppLocalDB? = null;
+        private const val DB_NAME = "GET_PET"
 
         fun getInstance(): AppLocalDB {
-            synchronized(this) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                        GetPetApplication.getInstance(),
-                        AppLocalDB::class.java,
-                        "app_local_db"
-                    ).build()
-                }
-
-                return INSTANCE as AppLocalDB
+            return instance?: synchronized(this) {
+                instance?: Room.databaseBuilder(
+                    GetPetApplication.getInstance().applicationContext,
+                    AppLocalDB::class.java,
+                    DB_NAME
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
             }
         }
     }
