@@ -7,6 +7,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.getpet.Fragments.MapFragment
+import com.getpet.Model.JoinedModel.JoinedPostModel
 import com.getpet.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -21,8 +22,12 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         setUpNav()
 
-
-
+//        val model = JoinedPostModel()
+//
+//        val posts = model.getAllPosts()
+//        posts.observe(this, {it ->
+//            val z = it
+//        })
     }
     private fun setUpNav(){
 
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.main_navhost_frag) as NavHostFragment
         val navController = navHostFragment.navController
 
-        //TODO: react to button push in the bottom navigation using the controller
+        //react to button push in the bottom navigation using the controller
         bottomNav.setOnItemSelectedListener {
             when(it.itemId){
 

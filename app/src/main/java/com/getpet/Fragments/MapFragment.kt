@@ -34,11 +34,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
-
-        // Add a marker in a location of your choice and move the camera
-        val location = LatLng(37.7749, -122.4194) // Example: San Francisco, CA
-        googleMap.addMarker(MarkerOptions().position(location).title("Marker in Tel-Aviv"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12.0f))
+//
+//        // Add a marker in a location of your choice and move the camera
+//        val location = LatLng(37.7749, -122.4194) // Example: San Francisco, CA
+//        googleMap.addMarker(MarkerOptions().position(location).title("Marker in Tel-Aviv"))
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12.0f))
     }
 
     override fun onResume() {
