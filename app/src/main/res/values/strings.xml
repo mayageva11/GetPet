@@ -67,4 +67,5 @@
     <string name="my_card_phone">phone:</string>
     <string name="my_card_owner">owner:</string>
     <string name="my_card_post_image">post_image</string>
+    <string name="edit_card_button_post">Edit</string>
 </resources>

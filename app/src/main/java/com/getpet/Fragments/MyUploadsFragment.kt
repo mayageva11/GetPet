@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.getpet.Adapters.MyUploadsAdapter
 import com.getpet.R
 import com.getpet.ViewModel.MyUploadsViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MyUploadsFragment : Fragment() {
@@ -18,6 +19,9 @@ class MyUploadsFragment : Fragment() {
     private lateinit var myUploadsViewModel: MyUploadsViewModel
     private lateinit var myAdapter: MyUploadsAdapter
     private lateinit var recyclerView: RecyclerView
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val user= auth.currentUser
+    val uid= user!!.uid
 
 
     override fun onCreateView(
@@ -56,12 +60,7 @@ class MyUploadsFragment : Fragment() {
     }
     private fun fetchUserPosts() {
         // Call the getUserPosts function to start observing the LiveData
-        val postsLiveData = myUploadsViewModel.getUserPosts()
-
-        // Observe the result and update _userPosts LiveData
-        postsLiveData.observe(viewLifecycleOwner) { posts ->
-            myUploadsViewModel.setUserPosts(posts)
-        }
+        myUploadsViewModel.getUserPosts(uid)
     }
 
 }

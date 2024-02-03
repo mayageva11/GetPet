@@ -25,9 +25,9 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var isPasswordVisible = false
     private var isConfirmPasswordVisible = false
-    private val GALLERY_REQUEST_CODE = 123
-    private lateinit var profileImageView: ImageView
-    private lateinit var profileImgUrl : String
+//    private val GALLERY_REQUEST_CODE = 123
+//    private lateinit var profileImageView: ImageView
+//    private lateinit var profileImgUrl : String
 
 
 
@@ -37,10 +37,10 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = Firebase.auth
         val storage = FirebaseStorage.getInstance()
-        val storageReference: StorageReference = storage.reference.child("profile_images")
-
-        profileImageView= findViewById(R.id.profile_image_display)
-        val selectImageBtn : Button= findViewById(R.id.profile_image)
+//        val storageReference: StorageReference = storage.reference.child("profile_images")
+//
+//        profileImageView= findViewById(R.id.profile_image_display)
+//        val selectImageBtn : Button= findViewById(R.id.profile_image)
 
 
         //get the information from the edit text

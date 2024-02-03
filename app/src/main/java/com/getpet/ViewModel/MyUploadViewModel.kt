@@ -14,17 +14,15 @@ class MyUploadsViewModel : ViewModel() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     // MutableLiveData to hold posts by UID data
-    private val _userPosts = MutableLiveData<List<PostEntity>>()
+    private lateinit var _userPosts: LiveData<List<PostEntity>>;
     val userPosts: LiveData<List<PostEntity>> get() = _userPosts
     private val user= auth.currentUser
     val uid= user!!.uid
 
-    fun getUserPosts(): JoinedPostModel.PostByUidLiveData {
-        // Observe LiveData from PostViewModel and update MutableLiveData
-        return postsModel.getPostsByUid(uid)
-    }
+
     // Method to set user posts in the LiveData
-    fun setUserPosts(posts: List<PostEntity>) {
-        _userPosts.value = posts
+    fun getUserPosts(uid: String) {
+        this._userPosts = postsModel.getPostsByUid(uid)
     }
+
 }

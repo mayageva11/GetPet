@@ -94,7 +94,7 @@ class UploadAPetFragment : Fragment() {
                 if (user != null) {
                     val uid = user.uid
                     //create a new document with the user id
-                    val docRef = db.collection("posts").document(uid)
+                    val docRef = db.collection("posts").document()
                     //make a collection
                     val data = hashMapOf(
                         "kind" to kind,

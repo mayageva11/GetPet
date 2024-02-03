@@ -1,5 +1,6 @@
 package com.getpet.Model.JoinedModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.getpet.GetPetApplication
 import com.getpet.Model.Entities.PostEntity
@@ -9,22 +10,38 @@ import java.util.LinkedList
 
 class JoinedPostModel {
     companion object {
-        public var instance: JoinedPostModel = JoinedPostModel()
-
+        var instance: JoinedPostModel = JoinedPostModel()
     }
+
     private val modelFirebase = PostFB()
     private val modelRoom = PostModel()
-
     private val allPosts = AllPostLiveData()
-    private val postByUid = PostByUidLiveData()
 
      fun getAllPosts(): AllPostLiveData{
          return allPosts
      }
-    fun getPostsByUid(uid :String): PostByUidLiveData{
-        return postByUid
-    }
 
+    fun getPostsByUid(uid: String): LiveData<List<PostEntity>> {
+        val postsLiveData = MutableLiveData<List<PostEntity>>()
+        GetPetApplication.getExecutorService().execute {
+            val postsByUid = modelRoom.getPostsByUid(uid)
+            GetPetApplication.getExecutorService().execute() {
+                postsLiveData.postValue(postsByUid)
+            }
+        }
+
+            modelFirebase.getPostsByUid(uid) { posts: List<PostEntity> ->
+                postsLiveData.postValue(posts)
+                // insert into Room
+                GetPetApplication.getExecutorService().execute {
+                    for (post in posts) {
+                        modelRoom.insertPost(post)
+                    }
+                }
+        }
+
+        return postsLiveData
+    }
 
     inner class AllPostLiveData: MutableLiveData<List<PostEntity>>() {
         init{
@@ -49,32 +66,5 @@ class JoinedPostModel {
                 }
             }
         }
-    }
-
-    //all the post by uid
-    inner class PostByUidLiveData: MutableLiveData<List<PostEntity>>(){
-        init{
-            value = LinkedList<PostEntity>()
-        }
-
-        override fun onActive() {
-            super.onActive()
-            fun getPostsByUid(uid : String){
-                GetPetApplication.getExecutorService().execute{
-                    val postsByUid = modelRoom.getPostsByUid(uid)
-                    postValue(postsByUid)
-                }
-                modelFirebase.getPostsByUid(uid) { posts: List<PostEntity> ->
-                    value = posts
-                    //insert the the room
-                    GetPetApplication.getExecutorService().execute {
-                        for (post in posts) {
-                            modelRoom.insertPost(post)
-                        }
-                    }
-                }
-            }
-        }
-
     }
 }
