@@ -9,12 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.getpet.Model.ModelFireBase.Post
 import com.getpet.R
-import com.getpet.activities.SinglePostActivity
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,7 +22,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+
+class gitMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
@@ -35,6 +36,12 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     private var key: String? = null
     private var isClicked = false
+
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+
+    private val userMarkers: MutableMap<String, Marker?> = HashMap()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,30 +80,29 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         // Check if location permissions are granted
         if (checkLocationPermission()) {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener(requireActivity()) { location ->
-                    if (location != null) {
-                        Log.d("location", "${location.longitude}########${location.latitude}")
-                        latitude = location.latitude
-                        longitude = location.longitude
 
-                        // Move camera to the user's current location
-                        googleMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(location.latitude, location.longitude),
-                                13f
-                            )
-                        )
+            // Initialize location request
+            locationRequest = LocationRequest.create().apply {
+                interval = 10000 // Update interval in milliseconds
+                fastestInterval = 5000 // Fastest update interval in milliseconds
+                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            }
 
-                        // Add a marker at the user's current location
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(location.latitude, location.longitude))
-                                .title("Your Location")
-                                .snippet("This is your current location")
-                        )
+            // Initialize location callback
+            locationCallback = object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    val location = locationResult.lastLocation
+                    location?.let {
+                        Log.d("location", "${it.longitude}########${it.latitude}")
+
+                        // Update the user's current location
+                        updateUserLocation("userId", LatLng(it.latitude, it.longitude))
                     }
                 }
+            }
+
+            // Request location updates
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
         } else {
             // Request location permissions if not granted.
             ActivityCompat.requestPermissions(
@@ -108,7 +114,25 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 MY_PERMISSIONS_REQUEST_LOCATION
             )
         }
+    }
 
+    private fun updateUserLocation(userId: String, location: LatLng) {
+        // Check if the marker for the user already exists
+        if (userMarkers.containsKey(userId)) {
+            // Update the existing marker
+            userMarkers[userId]?.position = location
+        } else {
+            // Add a new marker for the user
+            val marker = googleMap.addMarker(
+                MarkerOptions()
+                    .position(location)
+                    .title("User $userId")
+                    .snippet("This is the current location of User $userId")
+            )
+
+            // Store the marker in the map
+            userMarkers[userId] = marker
+        }
 
 //        val markers = ArrayList<Marker>()
 //        for (post in posts) {

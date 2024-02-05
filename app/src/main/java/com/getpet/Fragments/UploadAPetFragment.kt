@@ -20,6 +20,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.getpet.utilities.LocationUtils
 
 class UploadAPetFragment : Fragment() {
 
@@ -82,6 +83,10 @@ class UploadAPetFragment : Fragment() {
             val phone = phoneEditText.text.toString()
             val location = locationEditText.text.toString()
             val owner = ownerEditText.text.toString()
+
+
+            val geoPoint = LocationUtils.convertLocationToGeoPoint(requireContext(), location)
+
             // validate the information
             if (validate(kind, age, about, phone, location, owner)) {
                 // upload a collection to storage
@@ -95,7 +100,7 @@ class UploadAPetFragment : Fragment() {
                         "age" to age,
                         "about" to about,
                         "phone" to phone,
-                        "location" to location,
+                        "location" to geoPoint,
                         "owner" to owner,
                         "uid" to uid
                     )
