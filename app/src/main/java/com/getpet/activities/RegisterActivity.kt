@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.getpet.Constants
 import com.getpet.R
@@ -23,6 +24,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import java.io.IOException
+import com.google.firebase.storage.StorageReference
+
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -30,12 +33,22 @@ class RegisterActivity : AppCompatActivity() {
     private var isConfirmPasswordVisible = false
     private val PICK_IMAGE_REQUEST = 1
     private var imageUri: Uri? = null
+//    private val GALLERY_REQUEST_CODE = 123
+//    private lateinit var profileImageView: ImageView
+//    private lateinit var profileImgUrl : String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         auth = Firebase.auth
+        val storage = FirebaseStorage.getInstance()
+//        val storageReference: StorageReference = storage.reference.child("profile_images")
+//
+//        profileImageView= findViewById(R.id.profile_image_display)
+//        val selectImageBtn : Button= findViewById(R.id.profile_image)
+
 
         //get the information from the edit text
         val userNameEditText: EditText = findViewById(R.id.User_Name)
@@ -222,5 +235,8 @@ class RegisterActivity : AppCompatActivity() {
 
         passwordEditText.setSelection(passwordEditText.text.length)
     }
+
+
+
 
 }
