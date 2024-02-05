@@ -1,24 +1,35 @@
 package com.getpet.activities
 
+import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.getpet.Constants
 import com.getpet.R
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import java.io.IOException
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var isPasswordVisible = false
     private var isConfirmPasswordVisible = false
+    private val PICK_IMAGE_REQUEST = 1
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +44,12 @@ class RegisterActivity : AppCompatActivity() {
         val showPasswordButton: ImageButton = findViewById(R.id.showPasswordButton)
         val confirmPasswordEditText: EditText = findViewById(R.id.Confirm_Password)
         val showConfirmPasswordButton : ImageButton = findViewById(R.id.showConfirmPasswordButton)
+        val profileImageView: ImageView = findViewById(R.id.user_image)
+        val registerProfileImgBtn: MaterialButton = findViewById(R.id.register_profile_img)
+
+        registerProfileImgBtn.setOnClickListener {
+            openFileChooser()
+        }
 
         showPasswordButton.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
@@ -63,13 +80,75 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+            if (imageUri != null) {
+                // Upload the image to Firebase Storage
+                uploadImage()
+            }
 
         }
+
 
         val goBackBtn = findViewById<Button>(R.id.goBack_btn)
         goBackBtn.setOnClickListener {
             val goBackActivityIntent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(goBackActivityIntent)
+        }
+    }
+
+    private fun openFileChooser() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+            imageUri = data.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                val profileImageView: ImageView = findViewById(R.id.user_image)
+                profileImageView.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun getFileExtension(uri: Uri): String? {
+        val contentResolver: ContentResolver = contentResolver
+        val mimeTypeMap: MimeTypeMap = MimeTypeMap.getSingleton()
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri))
+    }
+
+    private fun uploadImage() {
+        if (imageUri != null) {
+            val storage = FirebaseStorage.getInstance()
+            val storageReference = storage.reference
+
+            val fileReference =
+                storageReference.child("profile_images/" + System.currentTimeMillis() + "." + getFileExtension(
+                    imageUri!!
+                ))
+
+            fileReference.putFile(imageUri!!)
+                .addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
+                    // Handle successful upload
+                    // Now you can get the download URL for the image
+                    fileReference.downloadUrl.addOnSuccessListener { uri ->
+                        val downloadUrl = uri.toString()
+                        // Use downloadUrl in your user registration logic
+                        // For example, you can save it to Firebase Database or associate it with the user
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Handle unsuccessful upload
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Upload failed: " + e.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
         }
     }
 

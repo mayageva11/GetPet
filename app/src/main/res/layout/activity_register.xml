@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cream"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- Header with Logo -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,25 +14,54 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="316dp"
-            android:src="@drawable/logo"
+            android:layout_height="290dp"
+            android:src="@drawable/logo" />
 
-            />
         <View
             android:id="@+id/divider"
             android:layout_width="wrap_content"
             android:layout_height="3dp"
-            android:background="@color/white" >
-        </View>
-
+            android:background="@color/white" />
     </LinearLayout>
 
+    <!-- Profile Image Section -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/register_profile_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_camera"
+            android:text="Profile Image" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="104dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp">
+
+            <!-- User Image -->
+            <ImageView
+                android:id="@+id/user_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/default_profile"
+                app:layout_constraintDimensionRatio="H, 1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" /> <!-- Add a default image if needed -->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <!-- User Details Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
+        <!-- Username -->
         <EditText
             android:id="@+id/User_Name"
             android:layout_width="280dp"
@@ -43,6 +74,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <!-- Email -->
         <EditText
             android:id="@+id/Email"
             android:layout_width="280dp"
@@ -54,43 +86,45 @@
             android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        >
 
-        <EditText
-            android:id="@+id/Password"
-            android:layout_width="280dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_password"
-            android:hint="@string/register_label_password"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="6dp"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/showPasswordButton"
-            android:inputType="textPassword"
-            />
-
-        <ImageButton
-            android:id="@+id/showPasswordButton"
-            android:layout_width="wrap_content"
+        <!-- Password -->
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center_horizontal"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/register_label_show_password"
-            android:padding="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_hide_password"
-            android:onClick="onShowPasswordClick"/>
-    </RelativeLayout>
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/Password"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_password"
+                android:hint="@string/register_label_password"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/raleway"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="6dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/showPasswordButton"
+                android:inputType="textPassword" />
+
+            <ImageButton
+                android:id="@+id/showPasswordButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_horizontal"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/register_label_show_password"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_hide_password"
+                android:onClick="onShowPasswordClick"/>
+        </RelativeLayout>
+
+        <!-- Confirm Password -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,7 +133,6 @@
             android:layout_below="@id/Password"
             android:layout_marginTop="16dp">
 
-            <!-- Confirm Password Field -->
             <EditText
                 android:id="@+id/Confirm_Password"
                 android:layout_width="280dp"
@@ -112,8 +145,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginStart="56dp"
-                android:layout_marginTop="-10dp"
-                />
+                android:layout_marginTop="-10dp" />
 
             <ImageButton
                 android:id="@+id/showConfirmPasswordButton"
@@ -128,20 +160,20 @@
                 android:onClick="onShowConfirmPasswordClick"/>
         </RelativeLayout>
 
+        <!-- Submit and Go Back Buttons -->
         <com.getpet.components.PrimaryButton
             android:id="@+id/submit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register_label_submit"
             android:layout_margin="10dp"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
+
         <com.getpet.components.PrimaryButton
             android:id="@+id/goBack_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/register_label_go_back"
-            />
+            android:text="@string/register_label_go_back" />
     </LinearLayout>
 </LinearLayout>
