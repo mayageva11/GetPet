@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class gitMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
@@ -74,6 +74,7 @@ class gitMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
+
 
         googleMap.setOnMarkerClickListener(this)
 
@@ -158,6 +159,11 @@ class gitMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
         return fineLocationPermission == PackageManager.PERMISSION_GRANTED && coarseLocationPermission == PackageManager.PERMISSION_GRANTED
+//
+//        // Add a marker in a location of your choice and move the camera
+//        val location = LatLng(37.7749, -122.4194) // Example: San Francisco, CA
+//        googleMap.addMarker(MarkerOptions().position(location).title("Marker in Tel-Aviv"))
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12.0f))
     }
 
     override fun onResume() {

@@ -58,7 +58,14 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="save_changes">save changes</string>
     <string name="profile_label_email">Email</string>
+    <string name="add_profile_image">+ profile image</string>
     <string name="map_content_description">Google Map</string>
-
-
+    <string name="kind_my_card">kind:</string>
+    <string name="my_card_age">age:</string>
+    <string name="my_card_about">about:</string>
+    <string name="my_card_location">location:</string>
+    <string name="my_card_phone">phone:</string>
+    <string name="my_card_owner">owner:</string>
+    <string name="my_card_post_image">post_image</string>
+    <string name="edit_card_button_post">Edit</string>
 </resources>

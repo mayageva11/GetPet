@@ -5,30 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.getpet.Adapters.MyUploadsAdapter
 import com.getpet.R
+import com.getpet.ViewModel.MyUploadsViewModel
+import com.google.firebase.auth.FirebaseAuth
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MyUploadsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MyUploadsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var myUploadsViewModel: MyUploadsViewModel
+    private lateinit var myAdapter: MyUploadsAdapter
+    private lateinit var recyclerView: RecyclerView
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val user= auth.currentUser
+    val uid= user!!.uid
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +32,35 @@ class MyUploadsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_my_uploads, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MyUploadsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyUploadsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        // Get ViewModel instance
+        myUploadsViewModel = ViewModelProvider(this)[MyUploadsViewModel::class.java]
+
+        // Initialize RecyclerView and adapter
+        recyclerView = view.findViewById(R.id.recyclerView)
+        myAdapter = MyUploadsAdapter()
+        recyclerView.adapter = myAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        // Fetch user-specific posts
+        fetchUserPosts()
+        // Observe user posts
+        observeUserPosts()
+
+
     }
+
+   private fun observeUserPosts() {
+        myUploadsViewModel.userPosts.observe(viewLifecycleOwner) { posts ->
+            myAdapter.submitList(posts)
+        }
+    }
+    private fun fetchUserPosts() {
+        // Call the getUserPosts function to start observing the LiveData
+        myUploadsViewModel.getUserPosts(uid)
+    }
+
 }
