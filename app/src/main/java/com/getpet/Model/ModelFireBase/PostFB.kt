@@ -56,5 +56,9 @@ class PostFB {
         }
     }
 
+    fun deletePost(post : PostEntity){
+
+    }
+
 
 }

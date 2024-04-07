@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.getpet.Model.Entities.PostEntity
 import com.getpet.R
+import com.google.android.material.button.MaterialButton
 
 class MyUploadsAdapter :
     RecyclerView.Adapter<MyUploadsAdapter.MyUploadsViewHolder>() {
@@ -18,6 +19,8 @@ class MyUploadsAdapter :
     private var posts = emptyList<PostEntity>()
 
         inner class MyUploadsViewHolder(itemView : View): RecyclerView.ViewHolder(itemView){
+//            private val deleteButton: MaterialButton = itemView.findViewById(R.id.delete_btn)
+
             private val image : ImageView = itemView.findViewById(R.id.my_post_image)
             private val kindTextView: TextView = itemView.findViewById(R.id.my_post_kind)
             private val ageTextView: TextView = itemView.findViewById(R.id.my_post_age)
@@ -25,6 +28,15 @@ class MyUploadsAdapter :
             private val locationTextView: TextView = itemView.findViewById(R.id.my_post_location)
             private val phoneTextView: TextView = itemView.findViewById(R.id.my_post_phone)
             private val ownerTextView: TextView = itemView.findViewById(R.id.my_post_owner)
+
+//            init {
+//                deleteButton.setOnClickListener {
+//                    val position = adapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onDeleteClickListener?.onDeleteClick(position)
+//                    }
+//                }
+//            }
 
             fun bind(post: PostEntity) {
                 // Load image using Glide
@@ -58,5 +70,11 @@ class MyUploadsAdapter :
         posts = newPosts
         notifyDataSetChanged()
     }
+
+//    interface OnDeleteClickListener {
+//        fun onDeleteClick(position: Int)
+//    }
+//
+//    var onDeleteClickListener: OnDeleteClickListener? = null
 
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.getpet.Adapters.MyUploadsAdapter
+import com.getpet.Model.Entities.PostEntity
 import com.getpet.R
 import com.getpet.ViewModel.MyUploadsViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -45,6 +46,8 @@ class MyUploadsFragment : Fragment() {
         recyclerView.adapter = myAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+
+
         // Fetch user-specific posts
         fetchUserPosts()
         // Observe user posts
@@ -61,6 +64,10 @@ class MyUploadsFragment : Fragment() {
     private fun fetchUserPosts() {
         // Call the getUserPosts function to start observing the LiveData
         myUploadsViewModel.getUserPosts(uid)
+    }
+
+    private fun deletePost(post : PostEntity){
+
     }
 
 }

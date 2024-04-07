@@ -21,6 +21,10 @@ class JoinedPostModel {
          return allPosts
      }
 
+    fun deletePost(post : PostEntity){
+
+    }
+
     fun getPostsByUid(uid: String): LiveData<List<PostEntity>> {
         val postsLiveData = MutableLiveData<List<PostEntity>>()
         GetPetApplication.getExecutorService().execute {

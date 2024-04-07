@@ -24,5 +24,8 @@ class MyUploadsViewModel : ViewModel() {
     fun getUserPosts(uid: String) {
         this._userPosts = postsModel.getPostsByUid(uid)
     }
+    fun deletePost(post: PostEntity){
+//        this._userPosts = postsModel.deletePost(post)
+    }
 
 }

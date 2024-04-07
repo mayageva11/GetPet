@@ -87,9 +87,10 @@ class UploadAPetFragment : Fragment() {
             val about = aboutEditText.text.toString()
             val phone = phoneEditText.text.toString()
             val location = locationEditText.text.toString()
+            val locationString= locationEditText.text.toString()
             val owner = ownerEditText.text.toString()
 
-
+            //TODO: this geopoint need to ne connected to the map
             val geoPoint = LocationUtils.convertLocationToGeoPoint(requireContext(), location)
 
             val image = imageUrlRef
@@ -106,7 +107,7 @@ class UploadAPetFragment : Fragment() {
                         "age" to age,
                         "about" to about,
                         "phone" to phone,
-                        "location" to geoPoint,
+                        "location" to locationString,
                         "owner" to owner,
                         "uid" to uid,
                         "image" to image
