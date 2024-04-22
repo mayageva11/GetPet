@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.getpet.R
+import com.getpet.activities.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -117,7 +118,7 @@ class UploadAPetFragment : Fragment() {
                         // Document uploaded successfully
                         Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
                         //show the user my uploads activity with his new post
-                         val uploadPostActivityIntent = Intent(context, MyUploadsFragment::class.java)
+                         val uploadPostActivityIntent = Intent(context, MainActivity::class.java)
                          startActivity(uploadPostActivityIntent)
                     }.addOnFailureListener { e ->
                         // Handle the failure

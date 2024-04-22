@@ -22,5 +22,8 @@ class PostModel {
     fun getPostsByUid(uid: String) : List<PostEntity> {
         return AppLocalDB.getInstance().postDao().getPostsByUserId(uid)
     }
+    fun updatePost(post: PostEntity){
+        return AppLocalDB.getInstance().postDao().updatePost(post)
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.getpet.Model.ModelFireBase
 import com.getpet.Model.Entities.PostEntity
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -56,7 +57,41 @@ class PostFB {
         }
     }
 
-    fun deletePost(post : PostEntity){
+    fun deletePostFromFirebase(post: PostEntity, callback: (Boolean) -> Unit) {
+        val id = post.id
+        db.collection("posts").document(id)
+            .delete()
+            .addOnSuccessListener {
+                callback(true) // Successful deletion from Firebase
+            }
+            .addOnFailureListener { exception ->
+                callback(false) // Handle deletion failure
+                println("Error deleting post with ID: $id. Exception: $exception")
+            }
+    }
+
+    fun updatePost(post: PostEntity, callback: (Boolean) -> Unit){
+        val db = Firebase.firestore
+        val postDocRef = db.collection(COLLECTION_NAME).document(post.id)
+        val updatedPostData = hashMapOf(
+            "kind" to post.kind,
+            "about" to post.about,
+            "age" to post.age,
+            "owner" to post.owner,
+            "location" to post.location,
+            "phone" to post.phone,
+            "image" to post.img,
+            "uid" to post.uid
+        )
+        postDocRef.update(updatedPostData as Map<String, Any>)
+            .addOnSuccessListener {
+                println("Post updated successfully")
+                callback(true)
+            }
+            .addOnFailureListener { exception ->
+                println("Error updating post: ${exception.message}")
+                callback(false)
+            }
 
     }
 

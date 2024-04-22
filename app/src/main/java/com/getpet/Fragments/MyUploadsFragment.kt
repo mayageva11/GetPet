@@ -36,22 +36,20 @@ class MyUploadsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         // Get ViewModel instance
         myUploadsViewModel = ViewModelProvider(this)[MyUploadsViewModel::class.java]
 
         // Initialize RecyclerView and adapter
         recyclerView = view.findViewById(R.id.recyclerView)
-        myAdapter = MyUploadsAdapter()
+        myAdapter = MyUploadsAdapter(myUploadsViewModel, activity)
         recyclerView.adapter = myAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-
-
 
         // Fetch user-specific posts
         fetchUserPosts()
         // Observe user posts
         observeUserPosts()
+
 
 
     }
@@ -68,6 +66,7 @@ class MyUploadsFragment : Fragment() {
 
     private fun deletePost(post : PostEntity){
 
+        
     }
 
 }
