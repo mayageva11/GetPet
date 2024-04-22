@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.getpet.Adapters.MyUploadsAdapter
+import com.getpet.Model.Entities.PostEntity
 import com.getpet.R
 import com.getpet.ViewModel.MyUploadsViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -35,13 +36,12 @@ class MyUploadsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         // Get ViewModel instance
         myUploadsViewModel = ViewModelProvider(this)[MyUploadsViewModel::class.java]
 
         // Initialize RecyclerView and adapter
         recyclerView = view.findViewById(R.id.recyclerView)
-        myAdapter = MyUploadsAdapter()
+        myAdapter = MyUploadsAdapter(myUploadsViewModel, activity)
         recyclerView.adapter = myAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -49,6 +49,7 @@ class MyUploadsFragment : Fragment() {
         fetchUserPosts()
         // Observe user posts
         observeUserPosts()
+
 
 
     }
@@ -61,6 +62,11 @@ class MyUploadsFragment : Fragment() {
     private fun fetchUserPosts() {
         // Call the getUserPosts function to start observing the LiveData
         myUploadsViewModel.getUserPosts(uid)
+    }
+
+    private fun deletePost(post : PostEntity){
+
+        
     }
 
 }

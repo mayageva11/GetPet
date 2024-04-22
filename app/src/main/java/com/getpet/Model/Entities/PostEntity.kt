@@ -1,12 +1,15 @@
 package com.getpet.Model.Entities
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "posts")
-data class PostEntity(
+data class PostEntity (
     @PrimaryKey()
-    val id: String,
+    var id: String,
     var img: String,
     var kind: String,
     var age: String, // TODO: Change to birth date
@@ -15,7 +18,8 @@ data class PostEntity(
     var location: String,
     var owner: String,
     var uid: String
-) {
+) : Serializable {
+
     fun fromMap(map: Map<String?, Any?>) {
         img = map["image"].toString()
         kind = map["kind"].toString()

@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.getpet.R
+import com.getpet.activities.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -87,9 +88,10 @@ class UploadAPetFragment : Fragment() {
             val about = aboutEditText.text.toString()
             val phone = phoneEditText.text.toString()
             val location = locationEditText.text.toString()
+            val locationString= locationEditText.text.toString()
             val owner = ownerEditText.text.toString()
 
-
+            //TODO: this geopoint need to ne connected to the map
             val geoPoint = LocationUtils.convertLocationToGeoPoint(requireContext(), location)
 
             val image = imageUrlRef
@@ -106,7 +108,7 @@ class UploadAPetFragment : Fragment() {
                         "age" to age,
                         "about" to about,
                         "phone" to phone,
-                        "location" to geoPoint,
+                        "location" to locationString,
                         "owner" to owner,
                         "uid" to uid,
                         "image" to image
@@ -116,7 +118,7 @@ class UploadAPetFragment : Fragment() {
                         // Document uploaded successfully
                         Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
                         //show the user my uploads activity with his new post
-                         val uploadPostActivityIntent = Intent(context, MyUploadsFragment::class.java)
+                         val uploadPostActivityIntent = Intent(context, MainActivity::class.java)
                          startActivity(uploadPostActivityIntent)
                     }.addOnFailureListener { e ->
                         // Handle the failure

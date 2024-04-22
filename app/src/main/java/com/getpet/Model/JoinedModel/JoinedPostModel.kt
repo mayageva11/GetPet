@@ -21,11 +21,40 @@ class JoinedPostModel {
          return allPosts
      }
 
-    fun getPostsByUid(uid: String): LiveData<List<PostEntity>> {
+    fun deletePost(post: PostEntity, callback: (Boolean) -> Unit) {
+        // Delete from Firebase
+        modelFirebase.deletePostFromFirebase(post) { isSuccessful ->
+            if (isSuccessful) {
+                // If deletion from Firebase was successful, delete from local database
+                GetPetApplication.getExecutorService().execute {
+                    modelRoom.deletePost(post)
+                }
+            } else {
+                // Handle Firebase deletion failure (optional)
+            }
+
+            callback(isSuccessful)
+        }
+    }
+
+    fun editPost(post: PostEntity, callback: (Boolean) -> Unit){
+        modelFirebase.updatePost(post){ isSuccessful ->
+            if (isSuccessful) {
+
+                // Update the post in the local database
+                GetPetApplication.getExecutorService().execute {
+                    modelRoom.updatePost(post)
+                }
+            }
+            callback(isSuccessful)
+        }
+    }
+
+    fun getPostsByUid(uid: String): MutableLiveData<List<PostEntity>> {
         val postsLiveData = MutableLiveData<List<PostEntity>>()
         GetPetApplication.getExecutorService().execute {
             val postsByUid = modelRoom.getPostsByUid(uid)
-            GetPetApplication.getExecutorService().execute() {
+            GetPetApplication.getExecutorService().execute {
                 postsLiveData.postValue(postsByUid)
             }
         }
