@@ -64,9 +64,6 @@ class MyUploadsFragment : Fragment() {
         myUploadsViewModel.getUserPosts(uid)
     }
 
-    private fun deletePost(post : PostEntity){
 
-        
-    }
 
 }
