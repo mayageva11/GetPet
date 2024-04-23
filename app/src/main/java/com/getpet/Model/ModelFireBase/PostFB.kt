@@ -95,5 +95,28 @@ class PostFB {
 
     }
 
+    fun uploadPost(post: PostEntity, callback: (Boolean) -> Unit){
+        val db = Firebase.firestore
+        val docRef = db.collection("posts").document()
+        val data = hashMapOf(
+            "kind" to post.kind,
+            "age" to post.age,
+            "about" to post.about,
+            "phone" to post.phone,
+            "location" to post.location,
+            "owner" to post.owner,
+            "uid" to post.uid,
+            "image" to post.img
+        )
+        docRef.set(data).addOnSuccessListener {
+            println("Post uploaded successfully")
+            callback(true)
+        }.addOnFailureListener { exception ->
+            println("Error uploading post: ${exception.message}")
+            callback(false)
+        }
+
+    }
+
 
 }

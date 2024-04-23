@@ -50,6 +50,20 @@ class JoinedPostModel {
         }
     }
 
+    fun uploadPost(post: PostEntity, callback: (Boolean) -> Unit){
+        modelFirebase.uploadPost(post){isSuccessful ->
+            if(isSuccessful){
+                // Update the post in the local database
+                GetPetApplication.getExecutorService().execute {
+                    modelRoom.insertPost(post)
+                }
+            }
+
+            callback(isSuccessful)
+        }
+
+    }
+
     fun getPostsByUid(uid: String): MutableLiveData<List<PostEntity>> {
         val postsLiveData = MutableLiveData<List<PostEntity>>()
         GetPetApplication.getExecutorService().execute {
@@ -96,4 +110,5 @@ class JoinedPostModel {
             }
         }
     }
+
 }
