@@ -35,6 +35,7 @@ import com.getpet.Model.JoinedModel.JoinedPostModel
 import com.getpet.ViewModel.MyUploadsViewModel
 import com.getpet.utilities.LocationUtils.convertLocationToGeoPoint
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.firebase.firestore.GeoPoint
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -113,8 +114,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 MY_PERMISSIONS_REQUEST_LOCATION
             )
         }
-        mapViewModel = ViewModelProvider(this).get(MapViewModel::class.java)
 
+        mapViewModel = ViewModelProvider(this).get(MapViewModel::class.java)
         // Fetch and observe posts
         mapViewModel.fetchPosts()
         mapViewModel.posts.observe(viewLifecycleOwner) { posts ->
@@ -128,8 +129,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
 
     private fun updateMapWithPosts(posts: List<PostEntity>) {
-        // Clear existing markers
-        googleMap.clear()
 
         // Add markers for each post
         posts.forEach { post ->
@@ -150,8 +149,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 // You can store additional data with the marker if needed
                 it.tag = post
             }
-        }
-    }
+        }}
+
 
 
 
