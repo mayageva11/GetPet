@@ -1,4 +1,3 @@
-
 package com.getpet.Fragments
 
 
@@ -34,6 +33,7 @@ import com.getpet.Model.Entities.PostEntity
 import com.getpet.Model.JoinedModel.JoinedPostModel
 import com.getpet.ViewModel.MyUploadsViewModel
 import com.getpet.utilities.LocationUtils.convertLocationToGeoPoint
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.firebase.firestore.GeoPoint
 
@@ -97,6 +97,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
                         // Update the user's current location
                         updateUserLocation("userId", LatLng(it.latitude, it.longitude))
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 15f))
+
                     }
                 }
             }
@@ -143,7 +145,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 MarkerOptions()
                     .position(location)
                     .title(post.kind).icon(
-                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
             )
             marker?.let {
                 // You can store additional data with the marker if needed

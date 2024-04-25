@@ -18,8 +18,6 @@ object LocationUtils {
                 val firstAddress = addresses[0]
                 return GeoPoint(firstAddress.latitude, firstAddress.longitude)
             }
-
-
         } catch (e: IOException) {
             e.printStackTrace()
 
