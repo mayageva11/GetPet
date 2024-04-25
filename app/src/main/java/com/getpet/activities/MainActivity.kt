@@ -21,13 +21,6 @@ class MainActivity : AppCompatActivity() {
         // Initialize Firebase Authentication
         auth = FirebaseAuth.getInstance()
         setUpNav()
-
-//        val model = JoinedPostModel()
-//
-//        val posts = model.getAllPosts()
-//        posts.observe(this, {it ->
-//            val z = it
-//        })
     }
     private fun setUpNav(){
 

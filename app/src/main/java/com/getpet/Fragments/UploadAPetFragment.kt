@@ -13,8 +13,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
+import com.getpet.Model.Entities.PostEntity
 import com.getpet.R
+import com.getpet.ViewModel.MyUploadsViewModel
+import com.getpet.ViewModel.UploadPostViewModel
+import com.getpet.activities.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -24,8 +30,8 @@ import com.google.firebase.storage.StorageReference
 import com.getpet.utilities.LocationUtils
 
 class UploadAPetFragment : Fragment() {
-
-
+    private lateinit var uploadPostViewModel: UploadPostViewModel
+    private lateinit var navController: NavController
     lateinit var auth: FirebaseAuth
     val db = Firebase.firestore
 
@@ -50,12 +56,18 @@ class UploadAPetFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        val navHostFragment: NavHostFragment = activity?.supportFragmentManager
+            ?.findFragmentById(R.id.main_navhost_frag) as NavHostFragment
+        navController = navHostFragment.navController
         return inflater.inflate(R.layout.fragment_upload_a_pet, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //call view model
+
+        // Get ViewModel instance
+        uploadPostViewModel = ViewModelProvider(this)[UploadPostViewModel::class.java]
 
         imageView = view.findViewById(R.id.post_image)
 
@@ -87,41 +99,28 @@ class UploadAPetFragment : Fragment() {
             val about = aboutEditText.text.toString()
             val phone = phoneEditText.text.toString()
             val location = locationEditText.text.toString()
+            val locationString= locationEditText.text.toString()
             val owner = ownerEditText.text.toString()
 
-
+            //TODO: this geopoint need to ne connected to the map
             val geoPoint = LocationUtils.convertLocationToGeoPoint(requireContext(), location)
 
-            val image = imageUrlRef
             // validate the information
             if (validate(kind, age, about, phone, location, owner)) {
                 // upload a collection to storage
                 if (user != null) {
                     val uid = user.uid
-                    //create a new document with the user id
-                    val docRef = db.collection("posts").document()
-                    //make a collection
-                    val data = hashMapOf(
-                        "kind" to kind,
-                        "age" to age,
-                        "about" to about,
-                        "phone" to phone,
-                        "location" to geoPoint,
-                        "owner" to owner,
-                        "uid" to uid,
-                        "image" to image
-                    )
-                    //upload
-                    docRef.set(data).addOnSuccessListener {
-                        // Document uploaded successfully
-                        Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
-                        //show the user my uploads activity with his new post
-                         val uploadPostActivityIntent = Intent(context, MyUploadsFragment::class.java)
-                         startActivity(uploadPostActivityIntent)
-                    }.addOnFailureListener { e ->
-                        // Handle the failure
-                        Toast.makeText(context, "Upload failed: ${e.message}", Toast.LENGTH_SHORT)
-                            .show()
+                    val post = PostEntity("", imageUrlRef, kind, age, about, phone, location, owner, uid)
+                    uploadPostViewModel.uploadPost(post){isSuccessful ->
+                        if(isSuccessful) {
+                            Toast.makeText(context, "uploaded successfully", Toast.LENGTH_SHORT)
+                                .show()
+                            navController.navigate(R.id.action_global_myUploadsFragment)
+
+                        } else{
+                            Toast.makeText(context, "Upload failed", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
                 }
             } else {
@@ -173,4 +172,6 @@ class UploadAPetFragment : Fragment() {
         }
     }
 }
+
+
 

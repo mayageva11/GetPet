@@ -9,20 +9,30 @@ import com.getpet.Model.JoinedModel.JoinedPostModel
 import com.google.firebase.auth.FirebaseAuth
 
 class MyUploadsViewModel : ViewModel() {
-
     private val postsModel = JoinedPostModel()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     // MutableLiveData to hold posts by UID data
-    private lateinit var _userPosts: LiveData<List<PostEntity>>;
+    private lateinit var _userPosts: MutableLiveData<List<PostEntity>>;
     val userPosts: LiveData<List<PostEntity>> get() = _userPosts
     private val user= auth.currentUser
     val uid= user!!.uid
 
-
     // Method to set user posts in the LiveData
     fun getUserPosts(uid: String) {
         this._userPosts = postsModel.getPostsByUid(uid)
+    }
+
+    fun deletePost(post: PostEntity) {
+        postsModel.deletePost(post) {isSuccessful ->
+            if (isSuccessful) {
+                val postsList = this._userPosts.value?.filter{ item -> item.id != post.id }
+                this._userPosts.postValue(postsList)
+            } else {
+                println("error deleting the post")
+                // TODO: Toast a message
+            }
+        }
     }
 
 }
