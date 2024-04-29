@@ -2,6 +2,7 @@ package com.getpet.Fragments
 
 
 import MapViewModel
+import SinglePostCardFragment
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,10 +14,9 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.getpet.Model.ModelRoom.Model.PostModel
 import com.getpet.R
-import com.getpet.activities.SinglePostActivity
-import com.getpet.utilities.LocationUtils
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -28,14 +28,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import android.content.Context
 import com.getpet.Model.Entities.PostEntity
-import com.getpet.Model.JoinedModel.JoinedPostModel
-import com.getpet.ViewModel.MyUploadsViewModel
 import com.getpet.utilities.LocationUtils.convertLocationToGeoPoint
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.firebase.firestore.GeoPoint
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -45,18 +41,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private val MY_PERMISSIONS_REQUEST_LOCATION = 122
     private val MY_PERMISSIONS_REQUEST_FINE_LOCATION = 123
     private lateinit var mapViewModel: MapViewModel
+    private lateinit var singlePost: SinglePostCardFragment
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var latitude: Double = 0.0
-    private var longitude: Double = 0.0
 
-    private var key: String? = null
-    private var isClicked = false
 
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
 
     private val userMarkers: MutableMap<String, Marker?> = HashMap()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -97,7 +91,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
                         // Update the user's current location
                         updateUserLocation("userId", LatLng(it.latitude, it.longitude))
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 15f))
+//                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 15f))
 
                     }
                 }
@@ -169,7 +163,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 MarkerOptions()
                     .position(location)
                     .title("User $userId")
-                    .snippet("This is the current location of User $userId"))
+                    .snippet("This is the current location of User $userId").flat(true))
             // Store the marker in the map
             userMarkers[userId] = marker
         }
@@ -213,16 +207,18 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val post = marker.tag as? PostModel
+        val navHostFragment: NavHostFragment = activity?.supportFragmentManager
+            ?.findFragmentById(R.id.main_navhost_frag) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val post = marker.tag as? PostEntity
         if (post != null) {
-            // Handle the click action
-            // For example, start SinglePostActivity
-            val intent = Intent(requireContext(), SinglePostActivity::class.java)
-            // Pass the post data to the activity
-            // intent.putExtra("post", post)
-            startActivity(intent)
+            val bundle = Bundle()
+            bundle.putSerializable("post", post)
+            navController.navigate(R.id.action_global_singlePostCardFragment, bundle)
         }
         return true
     }
+
 
 }
