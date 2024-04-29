@@ -19,7 +19,7 @@
             android:fontFamily="@font/handlee"
             android:text="@string/upload_a_pet_label_title"
             android:textSize="40sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -63,9 +63,9 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_name"
+            android:fontFamily="@font/raleway"
             android:hint="@string/upload_a_pet_label_kind"
             android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -75,9 +75,9 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_age"
+            android:fontFamily="@font/raleway"
             android:hint="@string/upload_a_let_label_age"
             android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -87,9 +87,9 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_add"
+            android:fontFamily="@font/raleway"
             android:hint="@string/upload_a_pet_label_about"
             android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -99,9 +99,9 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_phone"
+            android:fontFamily="@font/raleway"
             android:hint="@string/upload_a_pet_label_phone_to_connect"
             android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -111,9 +111,9 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_location"
+            android:fontFamily="@font/raleway"
             android:hint="@string/upload_a_pet_label_location"
             android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -123,9 +123,9 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_name"
+            android:fontFamily="@font/raleway"
             android:hint="@string/upload_a_pet_label_owner_name"
             android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
             android:textSize="20sp"
             android:textStyle="bold" />
 
