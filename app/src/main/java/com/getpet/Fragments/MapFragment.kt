@@ -39,9 +39,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
     private val MY_PERMISSIONS_REQUEST_LOCATION = 122
-    private val MY_PERMISSIONS_REQUEST_FINE_LOCATION = 123
     private lateinit var mapViewModel: MapViewModel
-    private lateinit var singlePost: SinglePostCardFragment
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -91,7 +89,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
                         // Update the user's current location
                         updateUserLocation("userId", LatLng(it.latitude, it.longitude))
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 15f))
+//                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 15f))
 
                     }
                 }

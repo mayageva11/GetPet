@@ -97,6 +97,9 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation ("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation ("org.json:json:20210307")
+
 
 }
 
