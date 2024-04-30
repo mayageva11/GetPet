@@ -83,7 +83,11 @@ class SinglePostCardFragment : Fragment() {
                 // Update UI with the modified response data
                 activity?.runOnUiThread {
                     // Format the response and update TextView
+
                     apiTextView.text = formatDogFacts(responseData)
+                    if (apiTextView.text.isEmpty()){
+                        apiTextView.text= "This breed not found"
+                    }
                 }
             }
         })

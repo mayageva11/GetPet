@@ -68,6 +68,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
         googleMap.setOnMarkerClickListener(this)
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.uiSettings.isCompassEnabled = true
 
         // Check if location permissions are granted
         if (checkLocationPermission()) {
@@ -87,10 +89,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                     location?.let {
                         Log.d("location", "${it.longitude}########${it.latitude}")
 
-                        // Update the user's current location
+                        // Update the user's current location only once
                         updateUserLocation("userId", LatLng(it.latitude, it.longitude))
-//                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 15f))
+                        // Move camera to user's location only once
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 15f))
 
+                        // Remove location updates after user's location is obtained
+                        fusedLocationClient.removeLocationUpdates(locationCallback)
                     }
                 }
             }
@@ -116,10 +121,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             // Update the map with markers based on the retrieved posts
             updateMapWithPosts(posts)
         }
-
-
-
     }
+
 
 
     private fun updateMapWithPosts(posts: List<PostEntity>) {
