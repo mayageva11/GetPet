@@ -124,11 +124,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_below="@id/Password"
             android:layout_marginTop="16dp">
 
             <EditText
                 android:id="@+id/Confirm_Password"
+                android:inputType="textPassword"
                 android:layout_width="280dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
