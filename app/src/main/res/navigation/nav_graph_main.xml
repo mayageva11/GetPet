@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+         <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
@@ -54,5 +54,15 @@
     <action
         android:id="@+id/action_global_editProfileFragment"
         app:destination="@id/editProfileFragment3" />
-
+    <fragment
+        android:id="@+id/singlePostCardFragment"
+        android:name="SinglePostCardFragment"
+        android:label="SinglePostCardFragment" />
+    <action
+        android:id="@+id/action_global_singlePostCardFragment"
+        app:destination="@id/singlePostCardFragment" >
+        <argument
+            android:name="post"
+            app:argType="com.getpet.Model.Entities.PostEntity"/>
+    </action>
 </navigation>

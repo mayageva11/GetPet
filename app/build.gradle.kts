@@ -55,29 +55,23 @@ android {
         }
     }
 }
-
 dependencies {
-
-
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
-    implementation("androidx.room:room-common:2.6.1")
     implementation("com.google.firebase:firebase-database-ktx:20.3.1")
     val nav_version = "2.7.7"
     val room_version = "2.6.1"
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation("androidx.compose.ui:ui:1.6.5")
-    implementation("androidx.compose.ui:ui-graphics:1.6.5")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.6.5")
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("androidx.compose.ui:ui:1.6.6")
+    implementation("androidx.compose.ui:ui-graphics:1.6.6")
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("com.google.firebase:firebase-auth:22.3.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.firebase:firebase-common-ktx:20.4.3")
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("com.google.firebase:firebase-firestore:24.11.1")
     implementation("com.github.bumptech.glide:glide:4.12.0")
@@ -88,16 +82,14 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.5")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.6.6")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
-    implementation ("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
-
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("org.json:json:20210307")
 }
-
-

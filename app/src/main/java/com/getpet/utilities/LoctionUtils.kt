@@ -20,10 +20,11 @@ object LocationUtils {
             }
         } catch (e: IOException) {
             e.printStackTrace()
+
             // Handle exception
         }
-
-        // Default to (0, 0) if conversion fails
         return GeoPoint(0.0, 0.0)
-    }
+
 }
+}
+
