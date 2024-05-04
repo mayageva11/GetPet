@@ -105,14 +105,9 @@ class SinglePostCardFragment : Fragment() {
             val jsonObject = jsonArray.getJSONObject(i)
 
             // Extract relevant fields from the JSON object
-            val breedName = jsonObject.getString("breedName")
             val funFact = jsonObject.getString("breedDescription")
-            val furColor = jsonObject.getString("furColor")
-
             // Append formatted data to the string builder
-            formattedData.append("Breed Name: $breedName\n")
-            formattedData.append("Fun Fact: $funFact\n")
-            formattedData.append("Fur Color: $furColor\n\n")
+            formattedData.append(" $funFact\n")
         }
 
         return formattedData.toString()

@@ -57,17 +57,19 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/kind_of_a_pet"
+        <Spinner
+            android:id="@+id/spinner_kind_of_a_pet"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:spinnerMode="dropdown"
             android:drawableStart="@drawable/ic_name"
             android:fontFamily="@font/raleway"
-            android:hint="@string/upload_a_pet_label_kind"
+            android:hint="Kind"
             android:textColor="@color/textColor"
             android:textSize="20sp"
             android:textStyle="bold"/>
+
 
         <EditText
             android:id="@+id/age_of_a_pet"
@@ -105,6 +107,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+
         <EditText
             android:id="@+id/location_of_a_pet"
             android:layout_width="250dp"
@@ -112,10 +115,11 @@
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_location"
             android:fontFamily="@font/raleway"
-            android:hint="@string/upload_a_pet_label_location"
+            android:hint="Location"
             android:textColor="@color/textColor"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
         <EditText
             android:id="@+id/owner_of_a_pet"

@@ -1,15 +1,20 @@
 package com.getpet.Fragments
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
@@ -27,7 +32,15 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.getpet.utilities.LocationUtils
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONArray
+import java.io.IOException
+
+
 
 class UploadAPetFragment : Fragment() {
     private lateinit var uploadPostViewModel: UploadPostViewModel
@@ -39,8 +52,15 @@ class UploadAPetFragment : Fragment() {
     private lateinit var storageRef: StorageReference
     private var imageUri: Uri? = null
     private lateinit var imageView: ImageView
-    private lateinit var imageUrlRef : String
+    private lateinit var imageUrlRef: String
 
+
+    private lateinit var kindEditText: Spinner
+    private lateinit var ageEditText: EditText
+    private lateinit var aboutEditText: EditText
+    private lateinit var locationEditText: EditText
+    private lateinit var phoneEditText: EditText
+    private lateinit var ownerEditText: EditText
 
     private val imagePicker =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -59,77 +79,81 @@ class UploadAPetFragment : Fragment() {
         val navHostFragment: NavHostFragment = activity?.supportFragmentManager
             ?.findFragmentById(R.id.main_navhost_frag) as NavHostFragment
         navController = navHostFragment.navController
-        return inflater.inflate(R.layout.fragment_upload_a_pet, container, false)
+        val view = inflater.inflate(R.layout.fragment_upload_a_pet, container, false)
+
+        allDogsKind();
+
+        return view
+
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get ViewModel instance
+        // Initialize ViewModel instance
         uploadPostViewModel = ViewModelProvider(this)[UploadPostViewModel::class.java]
 
+        // Initialize ImageView for displaying selected image
         imageView = view.findViewById(R.id.post_image)
 
         // Initialize Firebase Storage
         storageRef = FirebaseStorage.getInstance().reference
-        //upload button
+
+        // Initialize image picker
         val uploadImgBtn = view.findViewById<Button>(R.id.upload_pet_img)
         uploadImgBtn.setOnClickListener {
-
             imagePicker.launch("image/*")
         }
 
-        //get the  current user
+        // Get the current user
         val user = Firebase.auth.currentUser
 
-        // save all the information from the user
-        val kindEditText: EditText = view.findViewById(R.id.kind_of_a_pet)
-        val ageEditText: EditText = view.findViewById(R.id.age_of_a_pet)
-        val aboutEditText: EditText = view.findViewById(R.id.about_of_a_pet)
-        val phoneEditText: EditText = view.findViewById(R.id.phone_of_a_pet)
-        val locationEditText: EditText = view.findViewById(R.id.location_of_a_pet)
-        val ownerEditText: EditText = view.findViewById(R.id.owner_of_a_pet)
+        // Initialize views for pet details
+        kindEditText = view.findViewById(R.id.spinner_kind_of_a_pet)
+        ageEditText = view.findViewById(R.id.age_of_a_pet)
+        aboutEditText = view.findViewById(R.id.about_of_a_pet)
+        phoneEditText = view.findViewById(R.id.phone_of_a_pet)
+        locationEditText = view.findViewById(R.id.location_of_a_pet)
+        ownerEditText = view.findViewById(R.id.owner_of_a_pet)
 
-        // activate upload button
+
+
+        // Handle upload button click
         val uploadPostBtn = view.findViewById<Button>(R.id.upload_pet)
         uploadPostBtn.setOnClickListener {
-            val kind = kindEditText.text.toString()
+            val kind = kindEditText.selectedItem.toString()
             val age = ageEditText.text.toString()
             val about = aboutEditText.text.toString()
             val phone = phoneEditText.text.toString()
             val location = locationEditText.text.toString()
-            val locationString= locationEditText.text.toString()
             val owner = ownerEditText.text.toString()
 
-            //TODO: this geopoint need to ne connected to the map
-            val geoPoint = LocationUtils.convertLocationToGeoPoint(requireContext(), location)
-
-            // validate the information
+            // Validate pet details
             if (validate(kind, age, about, phone, location, owner)) {
-                // upload a collection to storage
+                // Upload post to Firebase
                 if (user != null) {
                     val uid = user.uid
                     val post = PostEntity("", imageUrlRef, kind, age, about, phone, location, owner, uid)
-                    uploadPostViewModel.uploadPost(post){isSuccessful ->
-                        if(isSuccessful) {
-                            Toast.makeText(context, "uploaded successfully", Toast.LENGTH_SHORT)
-                                .show()
+                    uploadPostViewModel.uploadPost(post) { isSuccessful ->
+                        if (isSuccessful) {
+                            Toast.makeText(context, "Uploaded successfully", Toast.LENGTH_SHORT).show()
+                            // Navigate to MyUploadsFragment
                             navController.navigate(R.id.action_global_myUploadsFragment)
-
-                        } else{
-                            Toast.makeText(context, "Upload failed", Toast.LENGTH_SHORT)
-                                .show()
+                        } else {
+                            Toast.makeText(context, "Upload failed", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             } else {
-                // Handle the failure
-                Toast.makeText(context, "please fill all the info correctly", Toast.LENGTH_SHORT)
-                    .show()
+                // Display error message if validation fails
+                Toast.makeText(context, "Please fill in all the information correctly", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+
+
     private fun validate(
         kind: String, age: String, about: String, phone: String, location: String, owner: String
 
@@ -157,12 +181,13 @@ class UploadAPetFragment : Fragment() {
                 // Get the download URL of the uploaded image
                 storageReference.downloadUrl.addOnSuccessListener { downloadUri ->
                     val imageUrl = downloadUri.toString()
-                    imageUrlRef= imageUrl
+                    imageUrlRef = imageUrl
                     // Load the image into your ImageView using Glide
                     Glide.with(this).load(imageUrl).into(imageView)
-                }.addOnFailureListener {e ->
+                }.addOnFailureListener { e ->
                     // Handle failed upload
-                    Toast.makeText(context, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Upload failed: ${e.message}", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             }.addOnFailureListener { e ->
@@ -171,4 +196,67 @@ class UploadAPetFragment : Fragment() {
             }
         }
     }
+
+
+
+    private fun allDogsKind() {
+        val client = OkHttpClient()
+
+        val request = Request.Builder()
+            .url("https://dogbreeddb.p.rapidapi.com/")
+            .get()
+            .addHeader("X-RapidAPI-Key", "2cb0328d76msh1e2591f5b72da78p137ae2jsnfd81ab8cb02b")
+            .addHeader("X-RapidAPI-Host", "dogbreeddb.p.rapidapi.com")
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseData = response.body?.string()
+
+                // Update UI with the modified response data
+                activity?.runOnUiThread {
+                    // Format the response and update Spinner
+                    val breedNamesArray = extractBreedNames(responseData)
+
+                    // Get the spinner
+                    val spinnerKindOfPet: Spinner? = view?.findViewById(R.id.spinner_kind_of_a_pet)
+
+                    // Create an ArrayAdapter using the retrieved breed names and a default spinner layout
+                    val adapter = ArrayAdapter<String>(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        breedNamesArray
+                    )
+
+                    // Specify the layout to use when the list of choices appears
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+                    // Apply the adapter to the spinner
+                    spinnerKindOfPet?.adapter = adapter
+                }
+            }
+        })
+    }
+
+    private fun extractBreedNames(responseData: String?): Array<String> {
+        if (responseData.isNullOrEmpty()) return emptyArray()
+
+        val jsonArray = JSONArray(responseData)
+        val breedNamesList = mutableListOf<String>()
+
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val breedName = jsonObject.getString("breedName")
+            breedNamesList.add(breedName)
+        }
+
+        return breedNamesList.toTypedArray()
+    }
+
+
+
 }

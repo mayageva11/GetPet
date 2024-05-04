@@ -29,7 +29,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="557dp"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -45,20 +45,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Kind:"
-                    android:textSize="15sp"
                     android:fontFamily="@font/raleway"
-                    android:textStyle="bold"
+                    android:text="Kind:"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/post_kind"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="7dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
@@ -73,20 +73,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/my_card_age"
-                    android:textSize="15sp"
                     android:fontFamily="@font/raleway"
-                    android:textStyle="bold"
+                    android:text="@string/my_card_age"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/post_age"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="7dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
@@ -101,20 +101,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/my_card_about"
-                    android:textSize="15sp"
                     android:fontFamily="@font/raleway"
-                    android:textStyle="bold"
+                    android:text="@string/my_card_about"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/post_about"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="7dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
@@ -128,20 +128,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/my_card_phone"
-                    android:textSize="15sp"
                     android:fontFamily="@font/raleway"
-                    android:textStyle="bold"
+                    android:text="@string/my_card_phone"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/post_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="7dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
@@ -156,20 +156,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/my_card_location"
-                    android:textSize="15sp"
                     android:fontFamily="@font/raleway"
-                    android:textStyle="bold"
+                    android:text="@string/my_card_location"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/post_location"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="7dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
@@ -185,20 +185,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/my_card_owner"
-                    android:textSize="15sp"
                     android:fontFamily="@font/raleway"
-                    android:textStyle="bold"
+                    android:text="@string/my_card_owner"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/post_owner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="7dp"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
@@ -206,29 +206,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Breed Information: "
-                    android:textSize="15sp"
                     android:fontFamily="@font/raleway"
-                    android:textStyle="bold"
+                    android:text="Fun fact about this kind"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="328dp">
 
                 <TextView
                     android:id="@+id/Api"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="7dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
-            </LinearLayout>
+            </ScrollView>
 
 
         </LinearLayout>
