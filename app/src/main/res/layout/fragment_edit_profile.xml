@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:text="@string/edir_profile_title"
+            android:text="Edit Profile"
             android:textSize="40sp"
             android:textStyle="bold"
             android:fontFamily="@font/handlee"

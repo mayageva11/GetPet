@@ -34,11 +34,6 @@
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.GetPet" />
         <activity
-            android:name=".activities.SinglePostActivity"
-            android:exported="false"
-            android:label="@string/title_activity_single_post"
-            android:theme="@style/Theme.GetPet" />
-        <activity
             android:name=".activities.RegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_register"

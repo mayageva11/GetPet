@@ -54,7 +54,7 @@
     <string name="main_label_my_posts">my posts</string>
     <string name="main_label_map_fragment">map</string>
     <string name="profile_label_title">Profile</string>
-    <string name="profile_picture_description">profite pic</string>
+    <string name="profile_picture_description">profile pic</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="save_changes">save changes</string>
     <string name="profile_label_email">Email</string>
@@ -69,5 +69,6 @@
     <string name="my_card_post_image">post_image</string>
     <string name="edit_card_button_post">Edit</string>
     <string name="edit_profile_btn">edit profile</string>
-    <string name="edir_profile_title">Edit Profile</string>
+    <string name="edit_profile_title">Edit Profile</string>
+
 </resources>

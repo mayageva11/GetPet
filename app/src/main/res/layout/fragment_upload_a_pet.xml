@@ -67,7 +67,7 @@
             android:hint="@string/upload_a_pet_label_kind"
             android:textColor="@color/textColor"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/age_of_a_pet"
