@@ -72,6 +72,7 @@ class EditPostFragment : Fragment() {
         ownerTextView.text = post.owner
         locationTextView.text = post.location
         phoneNumberTextView.text = post.phone
+        imageUrlRef= Uri.parse(post.img).toString()
 
         val navHostFragment: NavHostFragment = activity?.supportFragmentManager
             ?.findFragmentById(R.id.main_navhost_frag) as NavHostFragment

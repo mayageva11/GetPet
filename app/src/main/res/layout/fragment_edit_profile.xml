@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:orientation="vertical">
+
+    <!-- Header with Logo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:text="@string/edir_profile_title"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/handlee"
+            android:textColor="@color/textColor">
+        </TextView>
+
+
+    </LinearLayout>
+
+    <!-- Profile Image Section -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.getpet.components.PrimaryButton
+            android:id="@+id/edit_profile_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_camera"
+            android:text="Edit Image" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="104dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp">
+
+            <!-- User Image -->
+            <ImageView
+                android:id="@+id/edit_user_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/default_profile"
+                app:layout_constraintDimensionRatio="H, 1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" /> <!-- Add a default image if needed -->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/edit_user_Name"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:drawableStart="@drawable/ic_name"
+        android:hint="@string/register_label_name"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/raleway"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/edit_email"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:drawableStart="@drawable/ic_email"
+        android:hint="@string/register_label_email"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/raleway"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Password -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/edit_Password"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_password"
+            android:hint="@string/register_label_password"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="6dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/showPasswordButtonEditProfile"
+            android:inputType="textPassword" />
+
+        <ImageButton
+            android:id="@+id/showPasswordButtonEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_horizontal"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/register_label_show_password"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_hide_password"
+            android:onClick="onShowPasswordClick"/>
+    </RelativeLayout>
+
+    <!-- Confirm Password -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/edit_confirm_Password"
+            android:layout_width="280dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_password"
+            android:hint="@string/register_label_confirm_password"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="-10dp"
+            android:inputType="textPassword"/>
+
+        <ImageButton
+            android:id="@+id/showConfirmPasswordButtonEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_horizontal"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/register_label_show_confirm_password"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_hide_password"
+            android:onClick="onShowConfirmPasswordClickEditPassword"/>
+    </RelativeLayout>
+
+    <!-- Submit and Go Back Buttons -->
+    <com.getpet.components.PrimaryButton
+        android:id="@+id/save_info_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save changes"
+        android:layout_margin="10dp"
+        android:layout_gravity="center" />
+
+    <com.getpet.components.PrimaryButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="cancel" />
+</LinearLayout>

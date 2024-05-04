@@ -68,5 +68,6 @@
     <string name="my_card_owner">owner:</string>
     <string name="my_card_post_image">post_image</string>
     <string name="edit_card_button_post">Edit</string>
-
+    <string name="edit_profile_btn">edit profile</string>
+    <string name="edir_profile_title">Edit Profile</string>
 </resources>

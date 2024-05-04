@@ -48,6 +48,13 @@
             app:argType="com.getpet.Model.Entities.PostEntity"/>
     </action>
     <fragment
+        android:id="@+id/editProfileFragment3"
+        android:name="com.getpet.Fragments.EditProfileFragment"
+        android:label="EditProfileFragment" />
+    <action
+        android:id="@+id/action_global_editProfileFragment"
+        app:destination="@id/editProfileFragment3" />
+    <fragment
         android:id="@+id/singlePostCardFragment"
         android:name="SinglePostCardFragment"
         android:label="SinglePostCardFragment" />
