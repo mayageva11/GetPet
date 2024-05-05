@@ -92,7 +92,6 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     kapt("androidx.room:room-compiler:$room_version")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
     implementation ("org.json:json:20210307")
     implementation ("com.google.android.libraries.places:places:2.4.0")
     implementation ("com.android.volley:volley:1.2.1")

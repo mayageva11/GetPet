@@ -57,18 +57,32 @@
 
         </LinearLayout>
 
-        <Spinner
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/spinner_icon"
+                android:layout_width="29dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_pet_leg"
+                android:layout_marginEnd="8dp"/>
+
+            <Spinner
             android:id="@+id/spinner_kind_of_a_pet"
-            android:layout_width="250dp"
+            android:layout_width="213dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:spinnerMode="dropdown"
-            android:drawableStart="@drawable/ic_name"
             android:fontFamily="@font/raleway"
-            android:hint="Kind"
+            android:prompt="@string/upload_a_pet_kind_spinner"
             android:textColor="@color/textColor"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:popupBackground="@drawable/spinner_popup_background"/>
+        </LinearLayout>
 
 
         <EditText
@@ -107,6 +121,17 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/owner_of_a_pet"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_name"
+            android:fontFamily="@font/raleway"
+            android:hint="@string/upload_a_pet_label_owner_name"
+            android:textColor="@color/textColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/location_of_a_pet"
@@ -120,18 +145,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             />
-
-        <EditText
-            android:id="@+id/owner_of_a_pet"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_name"
-            android:fontFamily="@font/raleway"
-            android:hint="@string/upload_a_pet_label_owner_name"
-            android:textColor="@color/textColor"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <com.getpet.components.PrimaryButton
             android:id="@+id/upload_pet"

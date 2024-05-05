@@ -57,17 +57,31 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/edit_kind_of_a_pet"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_name"
-            android:hint="@string/upload_a_pet_label_kind"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/spinner_icon"
+                android:layout_width="29dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_pet_leg"
+                android:layout_marginEnd="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_kind_of_a_pet"
+                android:layout_width="213dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:spinnerMode="dropdown"
+                android:fontFamily="@font/raleway"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:popupBackground="@drawable/spinner_popup_background"/>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edit_age_of_a_pet"
@@ -106,24 +120,24 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edit_location_of_a_pet"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_location"
-            android:hint="@string/upload_a_pet_label_location"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
             android:id="@+id/edit_owner_of_a_pet"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:drawableStart="@drawable/ic_name"
             android:hint="@string/upload_a_pet_label_owner_name"
+            android:textColor="@color/textColor"
+            android:fontFamily="@font/raleway"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_location_of_a_pet"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_location"
+            android:hint="@string/upload_a_pet_label_location"
             android:textColor="@color/textColor"
             android:fontFamily="@font/raleway"
             android:textSize="20sp"

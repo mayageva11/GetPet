@@ -1,5 +1,4 @@
 package com.getpet.Fragments
-
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
@@ -39,8 +38,6 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONArray
 import java.io.IOException
-
-
 
 class UploadAPetFragment : Fragment() {
     private lateinit var uploadPostViewModel: UploadPostViewModel
@@ -85,7 +82,6 @@ class UploadAPetFragment : Fragment() {
 
         return view
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,7 +112,6 @@ class UploadAPetFragment : Fragment() {
         phoneEditText = view.findViewById(R.id.phone_of_a_pet)
         locationEditText = view.findViewById(R.id.location_of_a_pet)
         ownerEditText = view.findViewById(R.id.owner_of_a_pet)
-
 
 
         // Handle upload button click
@@ -151,7 +146,6 @@ class UploadAPetFragment : Fragment() {
             }
         }
     }
-
 
 
     private fun validate(
@@ -198,65 +192,53 @@ class UploadAPetFragment : Fragment() {
     }
 
 
-
     private fun allDogsKind() {
         val client = OkHttpClient()
-
         val request = Request.Builder()
             .url("https://dogbreeddb.p.rapidapi.com/")
             .get()
             .addHeader("X-RapidAPI-Key", "2cb0328d76msh1e2591f5b72da78p137ae2jsnfd81ab8cb02b")
             .addHeader("X-RapidAPI-Host", "dogbreeddb.p.rapidapi.com")
             .build()
-
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
             }
-
             override fun onResponse(call: Call, response: Response) {
                 val responseData = response.body?.string()
-
-                // Update UI with the modified response data
+// Update UI with the modified response data
                 activity?.runOnUiThread {
-                    // Format the response and update Spinner
+// Format the response and update Spinner
                     val breedNamesArray = extractBreedNames(responseData)
-
-                    // Get the spinner
+// Adding a default word to the spinner list
+                    val defaultWord = getString(R.string.upload_a_pet_kind_spinner)
+                    val breedNamesWithDefaultWordArr = arrayOf(defaultWord) + breedNamesArray
+// Get the spinner
                     val spinnerKindOfPet: Spinner? = view?.findViewById(R.id.spinner_kind_of_a_pet)
-
-                    // Create an ArrayAdapter using the retrieved breed names and a default spinner layout
+// Create an ArrayAdapter using the retrieved breed names and a default spinner layout
                     val adapter = ArrayAdapter<String>(
                         requireContext(),
                         android.R.layout.simple_spinner_item,
-                        breedNamesArray
+                        breedNamesWithDefaultWordArr
                     )
-
-                    // Specify the layout to use when the list of choices appears
+// Specify the layout to use when the list of choices appears
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-                    // Apply the adapter to the spinner
+// Apply the adapter to the spinner
                     spinnerKindOfPet?.adapter = adapter
+                    spinnerKindOfPet?.setSelection(0, false) // Set the initial selection to "Select A Kind"
                 }
             }
         })
     }
-
     private fun extractBreedNames(responseData: String?): Array<String> {
         if (responseData.isNullOrEmpty()) return emptyArray()
-
         val jsonArray = JSONArray(responseData)
         val breedNamesList = mutableListOf<String>()
-
         for (i in 0 until jsonArray.length()) {
             val jsonObject = jsonArray.getJSONObject(i)
             val breedName = jsonObject.getString("breedName")
             breedNamesList.add(breedName)
         }
-
         return breedNamesList.toTypedArray()
     }
-
-
-
 }
