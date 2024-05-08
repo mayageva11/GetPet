@@ -6,6 +6,7 @@ plugins {
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("kotlin-android")
     id("kotlin-kapt")
+
 }
 
 android {
@@ -93,7 +94,12 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     implementation ("com.squareup.okhttp3:okhttp:4.9.3")
     implementation ("org.json:json:20210307")
-    implementation ("com.google.android.libraries.places:places:2.4.0")
+    implementation ("com.google.android.libraries.places:places:3.1.0")
     implementation ("com.android.volley:volley:1.2.1")
     implementation("org.json:json:20210307")
+}
+buildscript {
+    dependencies {
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
+    }
 }

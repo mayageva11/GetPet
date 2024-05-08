@@ -105,18 +105,30 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edit_location_of_a_pet"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:drawableStart="@drawable/ic_location"
-            android:hint="@string/upload_a_pet_label_location"
-            android:textColor="@color/textColor"
-            android:fontFamily="@font/raleway"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <fragment
+                android:id="@+id/location_of_a_pet"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location"/>
+
+            <TextView
+                android:id="@+id/locationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/raleway"
+                android:hint="Location"
+                android:drawableStart="@drawable/ic_location"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
         <EditText
             android:id="@+id/edit_owner_of_a_pet"
             android:layout_width="250dp"

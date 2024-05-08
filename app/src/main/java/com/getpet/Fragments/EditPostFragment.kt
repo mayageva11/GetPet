@@ -1,5 +1,7 @@
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,11 @@ import com.getpet.Model.Entities.PostEntity
 import com.getpet.R
 import com.getpet.ViewModel.EditPostViewModel
 import com.getpet.ViewModel.MyUploadsViewModel
+import com.google.android.gms.common.api.Status
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.storage.FirebaseStorage
 
@@ -59,7 +66,7 @@ class EditPostFragment : Fragment() {
          ageTextView = view.findViewById(R.id.edit_age_of_a_pet)
          ownerTextView = view.findViewById(R.id.edit_owner_of_a_pet)
          phoneNumberTextView = view.findViewById(R.id.edit_phone_of_a_pet)
-         locationTextView = view.findViewById(R.id.edit_location_of_a_pet)
+        locationTextView =view.findViewById(R.id.locationText)
 
         // Set the values to the views
         Glide.with(requireContext())
@@ -83,6 +90,37 @@ class EditPostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        locationTextView =view.findViewById(R.id.locationText)
+
+
+        if (!Places.isInitialized()){
+            Places.initialize(requireContext(), "AIzaSyCU8AHeARmXXMQvEimvqaq11w3xqvyodgM")
+        }
+        val autocompleteSupportFragment=(childFragmentManager.findFragmentById(R.id.location_of_a_pet) as AutocompleteSupportFragment).setPlaceFields(
+            listOf(Place.Field.LAT_LNG, Place.Field.NAME)
+
+        )
+        autocompleteSupportFragment.setHint("Edit Location")
+
+        autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onError(p0: Status) {
+                Log.e( "error",p0.statusMessage.toString())
+            }
+
+            override fun onPlaceSelected(p0: Place) {
+                if(p0.latLng!=null){
+                    val locationName = p0.name ?: ""
+                    locationTextView.text = Editable.Factory.getInstance().newEditable(locationName)
+
+
+
+                    Toast.makeText(requireContext(), locationName.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
+        })
         editPostViewModel = ViewModelProvider(this)[EditPostViewModel::class.java]
         val uploadImgBtn = view.findViewById<Button>(R.id.edit_upload_pet_img)
 

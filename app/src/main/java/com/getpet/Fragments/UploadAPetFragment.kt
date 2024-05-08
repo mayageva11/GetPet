@@ -1,9 +1,8 @@
 package com.getpet.Fragments
 
-import android.content.ContentValues.TAG
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,16 +22,13 @@ import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.getpet.Model.Entities.PostEntity
 import com.getpet.R
-import com.getpet.ViewModel.MyUploadsViewModel
 import com.getpet.ViewModel.UploadPostViewModel
-import com.getpet.activities.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.getpet.utilities.LocationUtils
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -43,12 +39,9 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONArray
-import org.json.JSONObject
 import java.io.IOException
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.Place.Field
 import com.google.android.libraries.places.api.net.PlacesClient
-import java.util.Arrays
 
 
 class UploadAPetFragment : Fragment() {
@@ -63,11 +56,11 @@ class UploadAPetFragment : Fragment() {
     private lateinit var imageView: ImageView
     private lateinit var imageUrlRef: String
 
+    private lateinit var locationTextView: TextView
 
     private lateinit var kindEditText: Spinner
     private lateinit var ageEditText: EditText
     private lateinit var aboutEditText: EditText
-    private lateinit var locationEditText: EditText
     private lateinit var phoneEditText: EditText
     private lateinit var ownerEditText: EditText
 
@@ -90,6 +83,7 @@ class UploadAPetFragment : Fragment() {
         navController = navHostFragment.navController
         val view = inflater.inflate(R.layout.fragment_upload_a_pet, container, false)
 
+
         allDogsKind();
 
         return view
@@ -100,6 +94,36 @@ class UploadAPetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        locationTextView =view.findViewById(R.id.locationText)
+
+
+        if (!Places.isInitialized()){
+            Places.initialize(requireContext(), "AIzaSyCU8AHeARmXXMQvEimvqaq11w3xqvyodgM")
+        }
+        val autocompleteSupportFragment=(childFragmentManager.findFragmentById(R.id.location_of_a_pet) as AutocompleteSupportFragment).setPlaceFields(
+            listOf(Place.Field.LAT_LNG,Place.Field.NAME)
+
+        )
+        autocompleteSupportFragment.setHint("Select Location")
+
+        autocompleteSupportFragment.setOnPlaceSelectedListener(object :PlaceSelectionListener{
+            override fun onError(p0: Status) {
+                Log.e( "error",p0.statusMessage.toString())
+            }
+
+            override fun onPlaceSelected(p0: Place) {
+                if(p0.latLng!=null){
+                    val locationName = p0.name ?: ""
+                    locationTextView.text = Editable.Factory.getInstance().newEditable(locationName)
+
+
+
+                    Toast.makeText(requireContext(), locationName.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
+        })
         // Initialize ViewModel instance
         uploadPostViewModel = ViewModelProvider(this)[UploadPostViewModel::class.java]
 
@@ -123,7 +147,6 @@ class UploadAPetFragment : Fragment() {
         ageEditText = view.findViewById(R.id.age_of_a_pet)
         aboutEditText = view.findViewById(R.id.about_of_a_pet)
         phoneEditText = view.findViewById(R.id.phone_of_a_pet)
-        locationEditText = view.findViewById(R.id.location_of_a_pet)
         ownerEditText = view.findViewById(R.id.owner_of_a_pet)
 
 
@@ -135,7 +158,7 @@ class UploadAPetFragment : Fragment() {
             val age = ageEditText.text.toString()
             val about = aboutEditText.text.toString()
             val phone = phoneEditText.text.toString()
-            val location = locationEditText.text.toString()
+            val location = locationTextView.text.toString()
             val owner = ownerEditText.text.toString()
 
             // Validate pet details

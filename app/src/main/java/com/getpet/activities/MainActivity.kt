@@ -1,6 +1,9 @@
 package com.getpet.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
@@ -14,12 +17,14 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Initialize Firebase Authentication
         auth = FirebaseAuth.getInstance()
+
         setUpNav()
     }
     private fun setUpNav(){
