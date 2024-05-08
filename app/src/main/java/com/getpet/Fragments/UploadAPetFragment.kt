@@ -33,6 +33,7 @@ import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -41,7 +42,6 @@ import okhttp3.Response
 import org.json.JSONArray
 import java.io.IOException
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.PlacesClient
 
 
 class UploadAPetFragment : Fragment() {
@@ -55,9 +55,7 @@ class UploadAPetFragment : Fragment() {
     private var imageUri: Uri? = null
     private lateinit var imageView: ImageView
     private lateinit var imageUrlRef: String
-
     private lateinit var locationTextView: TextView
-
     private lateinit var kindEditText: Spinner
     private lateinit var ageEditText: EditText
     private lateinit var aboutEditText: EditText
@@ -87,7 +85,6 @@ class UploadAPetFragment : Fragment() {
         allDogsKind();
 
         return view
-
 
     }
 
@@ -150,7 +147,6 @@ class UploadAPetFragment : Fragment() {
         ownerEditText = view.findViewById(R.id.owner_of_a_pet)
 
 
-
         // Handle upload button click
         val uploadPostBtn = view.findViewById<Button>(R.id.upload_pet)
         uploadPostBtn.setOnClickListener {
@@ -183,7 +179,6 @@ class UploadAPetFragment : Fragment() {
             }
         }
     }
-
 
 
     private fun validate(
@@ -232,62 +227,45 @@ class UploadAPetFragment : Fragment() {
 
     private fun allDogsKind() {
         val client = OkHttpClient()
-
         val request = Request.Builder()
             .url("https://dogbreeddb.p.rapidapi.com/")
             .get()
             .addHeader("X-RapidAPI-Key", "2cb0328d76msh1e2591f5b72da78p137ae2jsnfd81ab8cb02b")
             .addHeader("X-RapidAPI-Host", "dogbreeddb.p.rapidapi.com")
             .build()
-
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
             }
-
             override fun onResponse(call: Call, response: Response) {
                 val responseData = response.body?.string()
-
-                // Update UI with the modified response data
                 activity?.runOnUiThread {
-                    // Format the response and update Spinner
                     val breedNamesArray = extractBreedNames(responseData)
-
-                    // Get the spinner
+                    val defaultWord = getString(R.string.upload_a_pet_kind_spinner)
+                    val breedNamesWithDefaultWordArr = arrayOf(defaultWord) + breedNamesArray
                     val spinnerKindOfPet: Spinner? = view?.findViewById(R.id.spinner_kind_of_a_pet)
-
-                    // Create an ArrayAdapter using the retrieved breed names and a default spinner layout
                     val adapter = ArrayAdapter<String>(
                         requireContext(),
                         android.R.layout.simple_spinner_item,
-                        breedNamesArray
+                        breedNamesWithDefaultWordArr
                     )
-
-                    // Specify the layout to use when the list of choices appears
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-                    // Apply the adapter to the spinner
+// Apply the adapter to the spinner
                     spinnerKindOfPet?.adapter = adapter
+                    spinnerKindOfPet?.setSelection(0, false) // Set the initial selection to "Select A Kind"
                 }
             }
         })
     }
-
     private fun extractBreedNames(responseData: String?): Array<String> {
         if (responseData.isNullOrEmpty()) return emptyArray()
-
         val jsonArray = JSONArray(responseData)
         val breedNamesList = mutableListOf<String>()
-
         for (i in 0 until jsonArray.length()) {
             val jsonObject = jsonArray.getJSONObject(i)
             val breedName = jsonObject.getString("breedName")
             breedNamesList.add(breedName)
         }
-
         return breedNamesList.toTypedArray()
     }
-
-
-
 }

@@ -1,3 +1,4 @@
+import android.app.VoiceInteractor
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -5,8 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,13 +29,20 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.storage.FirebaseStorage
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONArray
+import java.io.IOException
 
 class EditPostFragment : Fragment() {
     private lateinit var post: PostEntity
     private lateinit var editPostViewModel: EditPostViewModel
     private lateinit var navController: NavController
     private lateinit var imageView: ImageView
-    private lateinit var  kindTextView: TextView
+    private lateinit var  kindTextView: Spinner
     private lateinit var  aboutTextView: TextView
     private lateinit var  ageTextView: TextView
     private lateinit var  ownerTextView: TextView
@@ -59,21 +69,23 @@ class EditPostFragment : Fragment() {
         // Get the PostEntity object from the arguments
         post = arguments?.getSerializable("post") as PostEntity
 
+
+
         // Find the views in the layout
         imageView = view.findViewById(R.id.edit_post_image)
-        kindTextView = view.findViewById(R.id.edit_kind_of_a_pet)
-         aboutTextView = view.findViewById(R.id.edit_about_of_a_pet)
-         ageTextView = view.findViewById(R.id.edit_age_of_a_pet)
-         ownerTextView = view.findViewById(R.id.edit_owner_of_a_pet)
-         phoneNumberTextView = view.findViewById(R.id.edit_phone_of_a_pet)
         locationTextView =view.findViewById(R.id.locationText)
+        kindTextView = view.findViewById(R.id.spinner_kind_of_a_pet)
+        aboutTextView = view.findViewById(R.id.edit_about_of_a_pet)
+        ageTextView = view.findViewById(R.id.edit_age_of_a_pet)
+        ownerTextView = view.findViewById(R.id.edit_owner_of_a_pet)
+        phoneNumberTextView = view.findViewById(R.id.edit_phone_of_a_pet)
 
         // Set the values to the views
         Glide.with(requireContext())
             .load(post.img)
             .into(imageView)
 
-        kindTextView.text = post.kind
+
         aboutTextView.text = post.about
         ageTextView.text = post.age
         ownerTextView.text = post.owner
@@ -84,7 +96,7 @@ class EditPostFragment : Fragment() {
         val navHostFragment: NavHostFragment = activity?.supportFragmentManager
             ?.findFragmentById(R.id.main_navhost_frag) as NavHostFragment
         navController = navHostFragment.navController
-
+        allDogsKind();
         return view
     }
 
@@ -121,6 +133,7 @@ class EditPostFragment : Fragment() {
 
 
         })
+
         editPostViewModel = ViewModelProvider(this)[EditPostViewModel::class.java]
         val uploadImgBtn = view.findViewById<Button>(R.id.edit_upload_pet_img)
 
@@ -131,8 +144,8 @@ class EditPostFragment : Fragment() {
         // Find the submit button
         val submitButton: MaterialButton = view.findViewById(R.id.save_changes_post)
         submitButton.setOnClickListener {
-            val editedPost = PostEntity(post.id, imageUrlRef , kindTextView.text.toString(), ageTextView.text.toString(), aboutTextView.text.toString(),
-            phoneNumberTextView.text.toString(), locationTextView.text.toString(), ownerTextView.text.toString(), post.uid)
+            val editedPost = PostEntity(post.id, imageUrlRef , kindTextView.selectedItem.toString(), ageTextView.text.toString(), aboutTextView.text.toString(),
+                phoneNumberTextView.text.toString(), locationTextView.text.toString(), ownerTextView.text.toString(), post.uid)
             editPostViewModel.editPost(editedPost) { isSuccessful ->
                 if (isSuccessful) {
                     navController.navigate(R.id.action_global_myUploadsFragment)
@@ -166,5 +179,69 @@ class EditPostFragment : Fragment() {
                 Toast.makeText(context, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun allDogsKind() {
+        val client = OkHttpClient()
+
+        val request = Request.Builder()
+            .url("https://dogbreeddb.p.rapidapi.com/")
+            .get()
+            .addHeader("X-RapidAPI-Key", "2cb0328d76msh1e2591f5b72da78p137ae2jsnfd81ab8cb02b")
+            .addHeader("X-RapidAPI-Host", "dogbreeddb.p.rapidapi.com")
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseData = response.body?.string()
+
+                // Update UI with the modified response data
+                activity?.runOnUiThread {
+                    // Format the response and update Spinner
+                    val breedNamesArray = extractBreedNames(responseData)
+
+                    // Get the spinner
+                    val spinnerKindOfPet: Spinner? = view?.findViewById(R.id.spinner_kind_of_a_pet)
+
+                    // Create an ArrayAdapter using the retrieved breed names and a default spinner layout
+                    val adapter = ArrayAdapter<String>(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        breedNamesArray
+                    )
+
+                    // Specify the layout to use when the list of choices appears
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+                    // Apply the adapter to the spinner
+                    spinnerKindOfPet?.adapter = adapter
+
+                    // Set the selection based on the post's kind
+                    val index = breedNamesArray.indexOf(post.kind)
+                    if (index != -1) {
+                        spinnerKindOfPet?.setSelection(index)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun extractBreedNames(responseData: String?): Array<String> {
+        if (responseData.isNullOrEmpty()) return emptyArray()
+
+        val jsonArray = JSONArray(responseData)
+        val breedNamesList = mutableListOf<String>()
+
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val breedName = jsonObject.getString("breedName")
+            breedNamesList.add(breedName)
+        }
+
+        return breedNamesList.toTypedArray()
     }
 }
